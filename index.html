@@ -30,7 +30,6 @@
     overflow-x: hidden;
   }
 
-  /* Background pattern */
   body::before {
     content: '';
     position: fixed;
@@ -42,14 +41,13 @@
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
     position: relative;
     z-index: 1;
   }
 
-  /* Header */
   header {
     display: flex;
     align-items: flex-end;
@@ -71,11 +69,7 @@
     justify-content: center;
   }
 
-  .logo-mark img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  .logo-mark img { width: 100%; height: 100%; object-fit: contain; }
 
   h1 {
     font-family: 'Syne', sans-serif;
@@ -95,7 +89,6 @@
     margin-top: 4px;
   }
 
-  /* Site info row */
   .site-row {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -134,7 +127,6 @@
 
   .site-input:focus { border-color: var(--sun); }
 
-  /* Section headers */
   .section-title {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
@@ -155,7 +147,6 @@
     background: linear-gradient(to right, var(--border), transparent);
   }
 
-  /* Card */
   .card {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -168,23 +159,26 @@
   .load-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 
   .load-table th {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 0.62rem;
+    font-size: 0.58rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
-    padding: 8px 10px;
+    padding: 8px 8px;
     text-align: left;
     border-bottom: 1px solid var(--border);
+    white-space: nowrap;
   }
 
+  .load-table th.col-r { text-align: right; }
+
   .load-table td {
-    padding: 6px 8px;
+    padding: 5px 6px;
     vertical-align: middle;
   }
 
@@ -194,6 +188,12 @@
 
   .load-table tr:hover td { background: rgba(255,255,255,0.02); }
 
+  /* Active column highlight */
+  .col-day   { background: rgba(245,166,35,0.07); }
+  .col-night { background: rgba(58,158,255,0.07); }
+  .tab-day   .col-day   { background: rgba(245,166,35,0.16); }
+  .tab-night .col-night { background: rgba(58,158,255,0.16); }
+
   .td-label { color: var(--text); }
 
   .num-input {
@@ -201,31 +201,37 @@
     background: var(--panel2);
     border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 7px 10px;
+    padding: 6px 8px;
     color: var(--text);
     font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     text-align: right;
     outline: none;
     transition: border-color 0.2s;
   }
 
-  .num-input:focus { border-color: var(--blue); }
+  .num-input:focus        { border-color: var(--blue); }
+  .num-input.inp-day:focus   { border-color: var(--sun); }
+  .num-input.inp-night:focus { border-color: var(--blue); }
 
   .td-result {
     color: var(--green);
     font-weight: 700;
     text-align: right;
-    font-size: 0.8rem;
-  }
-
-  .td-unit {
-    color: var(--muted);
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     white-space: nowrap;
+    padding-right: 10px;
   }
 
-  /* Add row button */
+  .td-result-inv {
+    color: var(--sun-bright);
+    font-weight: 700;
+    text-align: right;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    padding-right: 10px;
+  }
+
   .btn-add {
     display: flex;
     align-items: center;
@@ -246,7 +252,6 @@
 
   .btn-add:hover { border-color: var(--sun); color: var(--sun); }
 
-  /* Delete row */
   .btn-del {
     background: none;
     border: none;
@@ -260,7 +265,6 @@
 
   .btn-del:hover { color: var(--red); background: rgba(255,87,87,0.1); }
 
-  /* Param grid */
   .param-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -290,10 +294,8 @@
   }
 
   .param-item input:focus, .param-item select:focus { border-color: var(--blue); }
-
   .param-item select option { background: var(--panel2); }
 
-  /* Results panel */
   .results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -317,9 +319,9 @@
     height: 2px;
   }
 
-  .result-card.solar::before { background: linear-gradient(to right, var(--sun), var(--sun-bright)); }
-  .result-card.battery::before { background: linear-gradient(to right, var(--blue), #60c8ff); }
-  .result-card.inverter::before { background: linear-gradient(to right, var(--green), #80ffcc); }
+  .result-card.solar::before      { background: linear-gradient(to right, var(--sun), var(--sun-bright)); }
+  .result-card.battery::before    { background: linear-gradient(to right, var(--blue), #60c8ff); }
+  .result-card.inverter::before   { background: linear-gradient(to right, var(--green), #80ffcc); }
   .result-card.controller::before { background: linear-gradient(to right, #b070ff, #e0a0ff); }
 
   .result-label {
@@ -339,9 +341,9 @@
     color: #fff;
   }
 
-  .result-value.solar { color: var(--sun-bright); }
-  .result-value.battery { color: #60c8ff; }
-  .result-value.inverter { color: var(--green); }
+  .result-value.solar      { color: var(--sun-bright); }
+  .result-value.battery    { color: #60c8ff; }
+  .result-value.inverter   { color: var(--green); }
   .result-value.controller { color: #e0a0ff; }
 
   .result-unit {
@@ -350,7 +352,6 @@
     margin-top: 4px;
   }
 
-  /* Recommended products */
   .rec-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -367,11 +368,7 @@
     gap: 14px;
   }
 
-  .rec-icon {
-    font-size: 1.4rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .rec-icon  { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
 
   .rec-title {
     font-family: 'Syne', sans-serif;
@@ -390,7 +387,6 @@
     color: var(--text);
   }
 
-  /* Calculate button */
   .btn-calc {
     display: flex;
     align-items: center;
@@ -412,11 +408,7 @@
     margin-top: 8px;
   }
 
-  .btn-calc:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(245,166,35,0.5);
-  }
-
+  .btn-calc:hover  { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,166,35,0.5); }
   .btn-calc:active { transform: translateY(0); }
 
   /* Totals bar */
@@ -434,22 +426,17 @@
   }
 
   .tot-item { text-align: center; }
-  .tot-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-  .tot-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
-  .tot-val.highlight { color: var(--sun-bright); font-size: 1.1rem; }
+  .tot-label { font-size: 0.60rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .tot-val   { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
+  .tot-val.hi-sun  { color: var(--sun-bright); font-size: 1.1rem; }
+  .tot-val.hi-gold { color: var(--green);      font-size: 1.1rem; }
 
-  /* Two-col layout */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* Slider for loss factors */
   .slider-row { display: flex; align-items: center; gap: 14px; }
-  .slider-row input[type=range] {
-    flex: 1;
-    accent-color: var(--blue);
-    height: 4px;
-    cursor: pointer;
-  }
+  .slider-row input[type=range] { flex: 1; accent-color: var(--blue); height: 4px; cursor: pointer; }
+
   .slider-display {
     background: var(--panel2);
     border: 1px solid var(--border);
@@ -461,16 +448,13 @@
     text-align: center;
   }
 
-  .note { font-size: 0.7rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
-
-  /* Tooltip hint */
   .hint { color: var(--muted); font-size: 0.68rem; margin-top: 4px; line-height: 1.4; }
 
-  /* Responsive table scroll */
   .table-wrap { overflow-x: auto; }
 
-  /* Day/Night tab */
-  .tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+
   .tab {
     padding: 8px 18px;
     border: 1px solid var(--border);
@@ -485,9 +469,21 @@
     background: none;
     color: var(--muted);
   }
-  .tab.active { background: var(--sun); border-color: var(--sun); color: #1A1000; }
 
-  /* Footer */
+  .tab.active-day   { background: var(--sun);  border-color: var(--sun);  color: #1A1000; }
+  .tab.active-night { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+  /* Tab hint */
+  .tab-hint {
+    font-size: 0.64rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding: 7px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    border-left: 2px solid var(--border);
+  }
+
   footer {
     margin-top: 48px;
     padding-top: 20px;
@@ -501,12 +497,7 @@
     gap: 12px;
   }
 
-  footer img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    opacity: 0.7;
-  }
+  footer img { width: 28px; height: 28px; object-fit: contain; opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -523,10 +514,12 @@
   </header>
 
   <!-- Site Info -->
-  <div class="section-title">Site Information</div>
+  <div class="section-title">Project Information</div>
   <div class="site-row">
-    <div class="site-label">Site Name</div>
-    <input type="text" class="site-input" id="siteName" placeholder="e.g. Baba Alli Ojodu Residence" />
+    <div class="site-label">Project Name</div>
+    <input type="text" class="site-input" id="projectName" placeholder="e.g. Baba Alli Ojodu Residence" />
+    <div class="site-label">Project Owner</div>
+    <input type="text" class="site-input" id="projectOwner" placeholder="e.g. Mr. Adewale" />
     <div class="site-label">System Voltage</div>
     <select id="sysVoltage" class="site-input" style="max-width:140px">
       <option value="12">12V</option>
@@ -539,34 +532,49 @@
   <div class="section-title">Table 1 — Load Profile</div>
   <div class="card">
     <div class="tabs">
-      <button class="tab active" id="tabDay" onclick="switchTab('day')">☀ Daytime</button>
-      <button class="tab" id="tabNight" onclick="switchTab('night')">🌙 Nighttime</button>
+      <button class="tab active-day"  id="tabDay"   onclick="switchTab('day')">☀ Daytime Hours</button>
+      <button class="tab"             id="tabNight" onclick="switchTab('night')">🌙 Nighttime Hours</button>
+    </div>
+
+    <div class="tab-hint" id="tabHint" style="border-left-color:var(--sun)">
+      Toggling between Day / Night <strong>highlights</strong> that column — all appliances are always visible and both hours update live.
     </div>
 
     <div class="table-wrap">
-      <table class="load-table" id="loadTable">
+      <table class="load-table tab-day" id="loadTable">
         <thead>
           <tr>
             <th>#</th>
             <th>Appliance</th>
-            <th>Power (W)</th>
-            <th>Qty</th>
-            <th>Runtime (hrs)</th>
-            <th>Inverter Factor</th>
-            <th>Wh/day</th>
+            <th class="col-r">Power (W)</th>
+            <th class="col-r">Qty</th>
+            <th class="col-r" style="color:var(--green)">Power × Qty</th>
+            <th class="col-r">Inv. Factor</th>
+            <th class="col-r" style="color:var(--sun-bright)">(Power × Qty) × Inv</th>
+            <th class="col-r col-day"   style="color:var(--sun)">☀ Day Hrs</th>
+            <th class="col-r col-night" style="color:var(--blue)">🌙 Night Hrs</th>
+            <th class="col-r" style="color:var(--green)">Energy With Time (Wh)</th>
             <th></th>
           </tr>
         </thead>
-        <tbody id="loadBody">
-        </tbody>
+        <tbody id="loadBody"></tbody>
       </table>
     </div>
+
     <button class="btn-add" onclick="addRow()">+ Add Appliance</button>
 
-    <div class="totals-bar" id="totalsBar">
+    <div class="totals-bar">
       <div class="tot-item">
-        <div class="tot-label">Total Wh/Day</div>
-        <div class="tot-val highlight" id="totWh">0</div>
+        <div class="tot-label">Power × Qty</div>
+        <div class="tot-val hi-sun" id="totBase">0 W</div>
+      </div>
+      <div class="tot-item">
+        <div class="tot-label">(Power × Qty) × Inv</div>
+        <div class="tot-val hi-gold" id="totBaseInv">0 W</div>
+      </div>
+      <div class="tot-item">
+        <div class="tot-label">Energy With Time</div>
+        <div class="tot-val" id="totWh">0 Wh</div>
       </div>
       <div class="tot-item">
         <div class="tot-label">Day Energy</div>
@@ -608,6 +616,13 @@
       </div>
       <div>
         <div style="margin-bottom:14px">
+          <label style="display:block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Irradiation Loss / Solar Availability Reduction</label>
+          <div class="slider-row">
+            <input type="range" id="irrLossSlider" min="0" max="30" value="0" oninput="updateSlider('irrLoss',this.value);calculate()">
+            <div class="slider-display" id="irrLossDisp">0%</div>
+          </div>
+        </div>
+        <div style="margin-bottom:14px">
           <label style="display:block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Derating / Aging Loss Factor</label>
           <div class="slider-row">
             <input type="range" id="lossSlider" min="5" max="30" value="15" oninput="updateSlider('loss',this.value);calculate()">
@@ -638,11 +653,21 @@
     <div class="param-grid">
       <div class="param-item">
         <label>Battery Technology</label>
-        <select id="battType" onchange="calculate()">
+        <select id="battType" onchange="applyBatteryDefaults(); calculate()">
           <option value="lithium">Lithium (LiFePO4)</option>
           <option value="agm">AGM / Lead Acid</option>
           <option value="gel">Gel</option>
         </select>
+      </div>
+      <div class="param-item">
+        <label>Battery DOD (%)</label>
+        <input type="number" id="battDod" value="80" step="1" min="1" max="95" onchange="syncDodSoc('dod'); calculate()">
+        <div class="hint">Usable battery depth of discharge</div>
+      </div>
+      <div class="param-item">
+        <label>Minimum SOC (%)</label>
+        <input type="number" id="battSoc" value="20" step="1" min="5" max="99" onchange="syncDodSoc('soc'); calculate()">
+        <div class="hint">Automatically linked to DOD</div>
       </div>
       <div class="param-item">
         <label>Battery Capacity (Ah)</label>
@@ -713,7 +738,7 @@
     </div>
 
     <div class="section-title" style="margin-top:24px">Recommended Products</div>
-    <div class="rec-grid" id="recGrid">
+    <div class="rec-grid">
       <div class="rec-item"><div class="rec-icon">☀️</div><div><div class="rec-title">Solar Panels</div><div class="rec-val" id="recPanels">—</div></div></div>
       <div class="rec-item"><div class="rec-icon">🔋</div><div><div class="rec-title">Battery System</div><div class="rec-val" id="recBatt">—</div></div></div>
       <div class="rec-item"><div class="rec-icon">⚡</div><div><div class="rec-title">Hybrid Inverter</div><div class="rec-val" id="recInverter">—</div></div></div>
@@ -729,44 +754,82 @@
 </div>
 
 <script>
-// =============================================
+// ─────────────────────────────────────────────────────────────
 // STATE
-// =============================================
+// Every load has BOTH dayHrs AND nightHrs.
+// The tab only visually highlights the active column —
+// no data is ever hidden or lost when switching tabs.
+// ─────────────────────────────────────────────────────────────
 const defaultLoads = [
-  { name: 'LED Light', power: 15, qty: 10, hrs: 6, inv: 1.0, isDay: false },
-  { name: 'Refrigerator', power: 150, qty: 1, hrs: 24, inv: 1.0, isDay: true },
-  { name: 'TV', power: 80, qty: 1, hrs: 6, inv: 1.0, isDay: false },
-  { name: 'Phone Charger', power: 20, qty: 4, hrs: 4, inv: 1.0, isDay: true },
-  { name: 'Table Fan', power: 60, qty: 2, hrs: 8, inv: 1.0, isDay: false },
+  { name: 'LED LIGHT', power: 15, qty: 10, dayHrs: 0, nightHrs: 6, inv: 1.0 },
+  { name: 'REFRIDGERATOR', power: 150, qty: 1, dayHrs: 12, nightHrs: 12, inv: 1.0 },
+  { name: 'FREEZER', power: 180, qty: 1, dayHrs: 12, nightHrs: 12, inv: 1.0 },
+  { name: 'INVERTER AC', power: 900, qty: 1, dayHrs: 6, nightHrs: 2, inv: 1.0 },
+  { name: 'INVERTER AC', power: 900, qty: 1, dayHrs: 6, nightHrs: 2, inv: 1.0 },
+  { name: 'MICROWAVE', power: 1200, qty: 1, dayHrs: 0.5, nightHrs: 0, inv: 1.0 },
+  { name: 'TABLE FAN', power: 60, qty: 1, dayHrs: 4, nightHrs: 4, inv: 1.0 },
+  { name: 'PHONE CHARGER', power: 20, qty: 4, dayHrs: 4, nightHrs: 0, inv: 1.0 },
+  { name: 'TV', power: 80, qty: 1, dayHrs: 2, nightHrs: 4, inv: 1.0 },
+  { name: 'TV', power: 80, qty: 1, dayHrs: 2, nightHrs: 4, inv: 1.0 },
 ];
 
-let loads = defaultLoads.map((l, i) => ({ ...l, id: i }));
-let nextId = loads.length;
+let loads   = defaultLoads.map((l, i) => ({ ...l, id: i }));
+let nextId  = loads.length;
 let activeTab = 'day';
 
-// =============================================
-// RENDER LOAD TABLE
-// =============================================
+// ─────────────────────────────────────────────────────────────
+// RENDER — shows ALL loads always; both hrs columns visible;
+// active tab column gets a brighter background highlight
+// ─────────────────────────────────────────────────────────────
 function renderTable() {
   const tbody = document.getElementById('loadBody');
-  const visible = loads.filter(l => l.isDay === (activeTab === 'day'));
+  const table = document.getElementById('loadTable');
+
+  // CSS class drives column highlight colour
+  table.className = 'load-table tab-' + activeTab;
+
   tbody.innerHTML = '';
-  visible.forEach(load => {
-    const wh = load.power * load.qty * load.hrs * load.inv;
+  loads.forEach((load, i) => {
+    // 1) Base load (no time): power × qty
+    const baseLoad      = load.power * load.qty;
+    // 2) Base load × inverter factor (still no time)
+    const baseLoadInv   = baseLoad * load.inv;
+    // 3) Final energy with time
+    const timedEnergy   = baseLoadInv * (load.dayHrs + load.nightHrs);
+
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="td-label">${load.id + 1}</td>
-      <td><input type="text" class="num-input" style="text-align:left;min-width:120px" value="${load.name}" 
-        onchange="loads.find(l=>l.id==${load.id}).name=this.value"></td>
-      <td><input type="number" class="num-input" value="${load.power}" min="0" step="1"
-        onchange="loads.find(l=>l.id==${load.id}).power=+this.value;calculate();renderTable()"></td>
-      <td><input type="number" class="num-input" value="${load.qty}" min="1" step="1" style="width:60px"
-        onchange="loads.find(l=>l.id==${load.id}).qty=+this.value;calculate();renderTable()"></td>
-      <td><input type="number" class="num-input" value="${load.hrs}" min="0" max="24" step="0.5"
-        onchange="loads.find(l=>l.id==${load.id}).hrs=+this.value;calculate();renderTable()"></td>
-      <td><input type="number" class="num-input" value="${load.inv}" min="0.5" max="1.5" step="0.01"
-        onchange="loads.find(l=>l.id==${load.id}).inv=+this.value;calculate();renderTable()"></td>
-      <td class="td-result">${wh.toFixed(0)}</td>
+      <td class="td-label">${i + 1}</td>
+      <td>
+        <input type="text" class="num-input appliance-input" list="applianceOptions" style="text-align:left;min-width:120px"
+          value="${load.name}"
+          onchange="loads.find(l=>l.id==${load.id}).name=this.value">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="${load.power}" min="0" step="1"
+          onchange="loads.find(l=>l.id==${load.id}).power=+this.value;calculate();renderTable()">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="${load.qty}" min="1" step="1" style="width:60px"
+          onchange="loads.find(l=>l.id==${load.id}).qty=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result">${baseLoad.toFixed(0)}</td>
+      <td>
+        <input type="number" class="num-input" value="${load.inv}" min="0.5" max="5" step="0.01"
+          onchange="loads.find(l=>l.id==${load.id}).inv=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result-inv">${baseLoadInv.toFixed(0)}</td>
+      <td class="col-day">
+        <input type="number" class="num-input inp-day" value="${load.dayHrs}" min="0" max="24" step="0.5"
+          title="Daytime hours"
+          onchange="loads.find(l=>l.id==${load.id}).dayHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="col-night">
+        <input type="number" class="num-input inp-night" value="${load.nightHrs}" min="0" max="24" step="0.5"
+          title="Nighttime hours"
+          onchange="loads.find(l=>l.id==${load.id}).nightHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result">${timedEnergy.toFixed(0)}</td>
       <td><button class="btn-del" onclick="removeRow(${load.id})">✕</button></td>
     `;
     tbody.appendChild(tr);
@@ -774,15 +837,29 @@ function renderTable() {
   updateTotals();
 }
 
+// ─────────────────────────────────────────────────────────────
+// SWITCH TAB — only changes visual highlight, never hides data
+// ─────────────────────────────────────────────────────────────
 function switchTab(t) {
   activeTab = t;
-  document.getElementById('tabDay').classList.toggle('active', t === 'day');
-  document.getElementById('tabNight').classList.toggle('active', t === 'night');
+
+  document.getElementById('tabDay').className   = 'tab' + (t === 'day'   ? ' active-day'   : '');
+  document.getElementById('tabNight').className = 'tab' + (t === 'night' ? ' active-night' : '');
+
+  const hint = document.getElementById('tabHint');
+  if (t === 'day') {
+    hint.style.borderLeftColor = 'var(--sun)';
+    hint.innerHTML = 'Toggling between Day / Night <strong>highlights</strong> that hours column — all appliances are always visible and both columns update live.';
+  } else {
+    hint.style.borderLeftColor = 'var(--blue)';
+    hint.innerHTML = '🌙 <strong>Night column highlighted.</strong> Update nighttime hours directly — daytime hours remain unchanged.';
+  }
+
   renderTable();
 }
 
 function addRow() {
-  loads.push({ id: nextId++, name: 'New Appliance', power: 100, qty: 1, hrs: 4, inv: 1.0, isDay: activeTab === 'day' });
+  loads.push({ id: nextId++, name: 'New Appliance', power: 100, qty: 1, dayHrs: 4, nightHrs: 2, inv: 1.0 });
   renderTable();
   calculate();
 }
@@ -793,96 +870,183 @@ function removeRow(id) {
   calculate();
 }
 
+// ─────────────────────────────────────────────────────────────
+// TOTALS
+// Power × Qty           = power × qty
+// (Power × Qty) × Inv   = power × qty × inv
+// Energy With Time      = power × qty × inv × (dayHrs + nightHrs)
+// Day Energy            = power × qty × inv × dayHrs
+// Night Energy          = power × qty × inv × nightHrs
+// ─────────────────────────────────────────────────────────────
 function updateTotals() {
-  const dayLoads = loads.filter(l => l.isDay);
-  const nightLoads = loads.filter(l => !l.isDay);
+  const totalBase      = loads.reduce((s, l) => s + l.power * l.qty,                                     0);
+  const totalBaseInv   = loads.reduce((s, l) => s + l.power * l.qty * l.inv,                             0);
+  const totalEnergy    = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs) * l.inv,  0);
+  const dayWh          = loads.reduce((s, l) => s + l.power * l.qty * l.dayHrs   * l.inv,               0);
+  const nightWh        = loads.reduce((s, l) => s + l.power * l.qty * l.nightHrs * l.inv,               0);
+  const peakW          = totalBase;
+  const avgW           = totalEnergy / 24;
 
-  const dayWh = dayLoads.reduce((s, l) => s + l.power * l.qty * l.hrs * l.inv, 0);
-  const nightWh = nightLoads.reduce((s, l) => s + l.power * l.qty * l.hrs * l.inv, 0);
-  const totalWh = dayWh + nightWh;
-  const peakW = loads.reduce((s, l) => s + l.power * l.qty, 0);
-  const avgW = totalWh / 24;
-
-  document.getElementById('totWh').textContent = totalWh.toFixed(0) + ' Wh';
-  document.getElementById('totDay').textContent = dayWh.toFixed(0) + ' Wh';
-  document.getElementById('totNight').textContent = nightWh.toFixed(0) + ' Wh';
-  document.getElementById('totPeak').textContent = peakW.toFixed(0) + ' W';
-  document.getElementById('totAvg').textContent = avgW.toFixed(1) + ' W';
+  document.getElementById('totBase').textContent    = totalBase.toFixed(0)    + ' W';
+  document.getElementById('totBaseInv').textContent = totalBaseInv.toFixed(0) + ' W';
+  document.getElementById('totWh').textContent      = totalEnergy.toFixed(0)  + ' Wh';
+  document.getElementById('totDay').textContent     = dayWh.toFixed(0)        + ' Wh';
+  document.getElementById('totNight').textContent   = nightWh.toFixed(0)      + ' Wh';
+  document.getElementById('totPeak').textContent    = peakW.toFixed(0)        + ' W';
+  document.getElementById('totAvg').textContent     = avgW.toFixed(1)         + ' W';
 }
 
-// =============================================
+// ─────────────────────────────────────────────────────────────
 // SLIDER HELPER
-// =============================================
+// ─────────────────────────────────────────────────────────────
 function updateSlider(name, val) {
-  const map = { loss: 'lossDisp', dirt: 'dirtDisp', excess: 'excessDisp' };
+  const map = { irrLoss: 'irrLossDisp', loss: 'lossDisp', dirt: 'dirtDisp', excess: 'excessDisp' };
   document.getElementById(map[name]).textContent = val + '%';
 }
 
-// =============================================
-// CORE CALCULATION (mirrors spreadsheet formulas)
-// =============================================
-function calculate() {
-  const totalWh = loads.reduce((s, l) => s + l.power * l.qty * l.hrs * l.inv, 0);
-  const dayWh = loads.filter(l => l.isDay).reduce((s, l) => s + l.power * l.qty * l.hrs * l.inv, 0);
-  const nightWh = totalWh - dayWh;
-  const peakW = loads.reduce((s, l) => s + l.power * l.qty, 0);
-
-  const irr = parseFloat(document.getElementById('irradiation').value) || 4.5;
-  const panelWp = parseFloat(document.getElementById('panelSize').value) || 475;
-  const autonomy = parseFloat(document.getElementById('autonomy').value) || 1;
-  const lossF = parseFloat(document.getElementById('lossSlider').value) / 100;
-  const dirtF = parseFloat(document.getElementById('dirtSlider').value) / 100;
-  const excessF = parseFloat(document.getElementById('excessSlider').value) / 100;
-
-  const battCap = parseFloat(document.getElementById('battCapacity').value) || 100;
-  const battV = parseFloat(document.getElementById('battVoltage').value) || 51.2;
-  const battAging = parseFloat(document.getElementById('battAging').value) || 1.25;
-  const battSafety = parseFloat(document.getElementById('battSafety').value) || 1.1;
-  const battEff = parseFloat(document.getElementById('battEff').value) || 0.85;
-  const sysV = parseFloat(document.getElementById('sysVoltage').value) || 24;
+function applyBatteryDefaults() {
   const battType = document.getElementById('battType').value;
+  const defaults = {
+    lithium: { dod: 80, soc: 20 },
+    agm: { dod: 50, soc: 50 },
+    gel: { dod: 60, soc: 40 }
+  };
+  const d = defaults[battType] || defaults.lithium;
+  document.getElementById('battDod').value = d.dod;
+  document.getElementById('battSoc').value = d.soc;
+}
+
+function syncDodSoc(source) {
+  const dodEl = document.getElementById('battDod');
+  const socEl = document.getElementById('battSoc');
+
+  if (source === 'dod') {
+    let dod = parseFloat(dodEl.value);
+    if (isNaN(dod)) dod = 80;
+    dod = Math.min(Math.max(dod, 1), 95);
+    dodEl.value = dod;
+    socEl.value = Math.max(5, Math.min(99, 100 - dod)).toFixed(0);
+  } else {
+    let soc = parseFloat(socEl.value);
+    if (isNaN(soc)) soc = 20;
+    soc = Math.min(Math.max(soc, 5), 99);
+    socEl.value = soc;
+    dodEl.value = Math.max(1, Math.min(95, 100 - soc)).toFixed(0);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// CORE CALCULATION
+// Sizing uses Total Energy × Inv (totalEnergyInv) as daily Wh
+// ─────────────────────────────────────────────────────────────
+function calculate() {
+  const totalWhRaw = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs), 0);
+  const totalWhInv = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs) * l.inv, 0);
+  const peakWRaw   = loads.reduce((s, l) => s + l.power * l.qty, 0);
+  const peakWInv   = loads.reduce((s, l) => s + l.power * l.qty * l.inv, 0);
+
+  const irr      = parseFloat(document.getElementById('irradiation').value) || 4.5;
+  const panelWp  = parseFloat(document.getElementById('panelSize').value)   || 475;
+  const autonomy = parseFloat(document.getElementById('autonomy').value)    || 1;
+  const irrLossF = parseFloat(document.getElementById('irrLossSlider').value) / 100;
+  const lossF    = parseFloat(document.getElementById('lossSlider').value)    / 100;
+  const dirtF    = parseFloat(document.getElementById('dirtSlider').value)    / 100;
+  const excessF  = parseFloat(document.getElementById('excessSlider').value)  / 100;
+
+  const battCap    = parseFloat(document.getElementById('battCapacity').value) || 100;
+  const battV      = parseFloat(document.getElementById('battVoltage').value)  || 51.2;
+  const battAgingIn  = parseFloat(document.getElementById('battAging').value);
+  const battSafetyIn = parseFloat(document.getElementById('battSafety').value);
+  const battEffIn    = parseFloat(document.getElementById('battEff').value);
+  const sysV       = parseFloat(document.getElementById('sysVoltage').value)   || 24;
+  const battType   = document.getElementById('battType').value;
+  const usableDod  = Math.min(Math.max((parseFloat(document.getElementById('battDod').value) || 80) / 100, 0.01), 0.95);
+  const minSoc     = Math.min(Math.max((parseFloat(document.getElementById('battSoc').value) || (100 - usableDod * 100)) / 100, 0.05), 0.99);
+
+  // Compatibility helper:
+  // - values > 1 are treated as direct multipliers (e.g. 1.25)
+  // - values between 0 and 1 are treated as workbook-style loss fractions (e.g. 0.20 => /(1-0.20))
+  const asMultiplier = (v, fallback) => {
+    const x = parseFloat(v);
+    if (!isFinite(x) || x <= 0) return fallback;
+    if (x > 1) return x;
+    return 1 / Math.max(1 - x, 0.01);
+  };
+
+  // Battery efficiency stays as efficiency by default (0.85 = 85%).
+  // If someone enters a very small workbook-style loss fraction such as 0.05,
+  // treat it as 5% storage loss => 95% efficiency.
+  const asEfficiency = (v, fallback) => {
+    const x = parseFloat(v);
+    if (!isFinite(x) || x <= 0) return fallback;
+    if (x <= 0.3) return Math.max(1 - x, 0.01);
+    return Math.min(x, 0.99);
+  };
+
+  const battAgingMult  = asMultiplier(battAgingIn, 1.25);
+  const battSafetyMult = asMultiplier(battSafetyIn, 1.10);
+  const battEff        = asEfficiency(battEffIn, 0.85);
+
+  // Hidden workbook-style end-of-life factors.
+  const arrayEolFactor   = 0.8;
+  const batteryEolFactor = 0.8;
 
   // TABLE 2: SOLAR ARRAY
-  const basicArray = totalWh / (irr * battEff);
-  const deratedArray = basicArray / (1 - lossF);
-  const adjustedArray = deratedArray / (1 - dirtF) / (1 - excessF);
-  const minPanels = Math.ceil(basicArray / panelWp);
-  const eolPanels = Math.ceil(adjustedArray / panelWp);
-  const arrayWpEoL = eolPanels * panelWp;
+  // Workbook sequence:
+  // irradiation -> irradiation loss -> basic array -> dirt -> aging/derating -> excess -> panel selection -> EoL check
+  const effectiveIrr   = Math.max(irr * (1 - irrLossF), 0.01);
+  const basicArrayWp   = totalWhInv / effectiveIrr;
+  const dirtAdjustedWp = basicArrayWp * (1 + dirtF);
+  const agedAdjustedWp = dirtAdjustedWp * (1 + lossF);
+  const requiredArrayWp = agedAdjustedWp * (1 + excessF);
+  const minPanelsExact = requiredArrayWp / Math.max(panelWp, 1);
+  const selectedPanels = Math.max(1, Math.ceil(minPanelsExact));
+  const selectedArrayWp = selectedPanels * panelWp;
+  const arrayWpEoL     = selectedArrayWp * arrayEolFactor;
 
   // TABLE 3: BATTERY BANK
-  const oneDayAh = totalWh / sysV;
-  const battBankEoL = (oneDayAh * autonomy * battAging * battSafety) / battEff;
-  const battCapSys = (battCap * battV) / sysV;
-  const battCount = Math.ceil(battBankEoL / battCapSys);
-  const actualBankAh = battCount * battCapSys;
+  // Workbook sequence:
+  // one day Ah -> autonomy -> aging -> safety -> DOD/SOC reserve -> storage efficiency -> battery selection
+  const oneDayAh       = totalWhInv / Math.max(sysV, 1);
+  const autonomyAh     = oneDayAh * autonomy;
+  const agedAh         = autonomyAh * battAgingMult;
+  const safeAh         = agedAh * battSafetyMult;
+  const dodAdjustedAh  = safeAh / usableDod;
+  const battBankReqAh  = dodAdjustedAh / battEff;
+
+  const battCapSysAh   = (battCap * battV) / Math.max(sysV, 1);
+  const battCount      = Math.max(1, Math.ceil(battBankReqAh / Math.max(battCapSysAh, 0.01)));
+  const selectedBankAh = battCount * battCapSysAh;
+  const bankEolAh      = selectedBankAh * batteryEolFactor;
+  const availableBankAh = bankEolAh * usableDod;
+  const actualAutonomy = oneDayAh > 0 ? (availableBankAh / oneDayAh) : 0;
 
   // INVERTER SIZE
-  const inverterKW = Math.ceil((peakW * 1.25) / 1000 * 10) / 10;
+  const inverterKW = Math.ceil((peakWInv * 1.25) / 1000 * 10) / 10;
 
-  // CHARGE CONTROLLER (MPPT)
-  const ccAmps = Math.ceil((arrayWpEoL / sysV) * 1.25 / 10) * 10;
+  // CHARGE CONTROLLER (MPPT) based on installed array, not EoL-reduced array
+  const ccAmps = Math.ceil((selectedArrayWp / Math.max(sysV, 1)) * 1.25 / 10) * 10;
 
-  // BATTERY KWH
-  const battKwh = (actualBankAh * sysV) / 1000;
+  // BATTERY KWH (installed nameplate at system voltage equivalent)
+  const battKwh = (selectedBankAh * sysV) / 1000;
 
-  // UPDATE DISPLAY
-  document.getElementById('rPanels').textContent = eolPanels;
-  document.getElementById('rPanelsUnit').textContent = `panels (${panelWp}Wp each) · min ${minPanels} basic`;
-  document.getElementById('rArrayWp').textContent = (arrayWpEoL / 1000).toFixed(2) + ' kWp';
-  document.getElementById('rBattAh').textContent = battBankEoL.toFixed(0);
-  document.getElementById('rBattCount').textContent = battCount;
-  document.getElementById('rBattUnit').textContent = `× ${battCap}Ah = ${battKwh.toFixed(2)} kWh`;
-  document.getElementById('rInverter').textContent = inverterKW.toFixed(1);
+  // UPDATE RESULTS DISPLAY
+  document.getElementById('rPanels').textContent     = selectedPanels;
+  document.getElementById('rPanelsUnit').textContent = `panels (${panelWp}Wp each) · calc ${minPanelsExact.toFixed(1)} min`;
+  document.getElementById('rArrayWp').textContent    = (arrayWpEoL / 1000).toFixed(2) + ' kWp';
+  document.getElementById('rBattAh').textContent     = battBankReqAh.toFixed(0);
+  document.getElementById('rBattCount').textContent  = battCount;
+  document.getElementById('rBattUnit').textContent   = `× ${battCap}Ah = ${battKwh.toFixed(2)} kWh · Avail ${availableBankAh.toFixed(0)}Ah · DOD ${(usableDod * 100).toFixed(0)}% · Min SOC ${(minSoc * 100).toFixed(0)}% · ${actualAutonomy.toFixed(1)} day(s)`;
+  document.getElementById('rInverter').textContent   = inverterKW.toFixed(1);
   document.getElementById('rController').textContent = ccAmps;
 
   // RECOMMENDATIONS
-  document.getElementById('recPanels').textContent = `${eolPanels} × ${panelWp}W Solar Panels`;
+  document.getElementById('recPanels').textContent = `${selectedPanels} × ${panelWp}W Solar Panels (${(selectedArrayWp / 1000).toFixed(2)} kWp installed)`;
 
   let battStr = '';
   if (battType === 'lithium') {
     const packKwh = battV >= 48 ? 5.12 : 2.56;
-    const packs = Math.ceil(battKwh / packKwh);
+    const packs   = Math.ceil(battKwh / packKwh);
     battStr = `${packs} × ${packKwh}kWh LiFePO4 Battery (${(packs * packKwh).toFixed(2)} kWh)`;
   } else {
     battStr = `${battCount} × ${battCap}Ah ${battType.toUpperCase()} Battery`;
@@ -894,17 +1058,27 @@ function calculate() {
   document.getElementById('recInverter').textContent = `${recInvKW}kW Hybrid Inverter`;
 
   const ccSizes = [20, 30, 40, 50, 60, 80, 100, 120, 150, 200];
-  const recCC = ccSizes.find(s => s >= ccAmps) || ccAmps;
+  const recCC   = ccSizes.find(s => s >= ccAmps) || ccAmps;
   document.getElementById('recController').textContent = `${recCC}A MPPT Charge Controller`;
 
   updateTotals();
 }
 
-// =============================================
 // INIT
-// =============================================
+applyBatteryDefaults();
 renderTable();
 calculate();
 </script>
+
+<datalist id="applianceOptions">
+  <option value="LED LIGHT"></option>
+  <option value="REFRIDGERATOR"></option>
+  <option value="FREEZER"></option>
+  <option value="INVERTER AC"></option>
+  <option value="MICROWAVE"></option>
+  <option value="TABLE FAN"></option>
+  <option value="PHONE CHARGER"></option>
+  <option value="TV"></option>
+</datalist>
 </body>
 </html>
