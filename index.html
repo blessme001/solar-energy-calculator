@@ -631,27 +631,12 @@
 
   footer img { width: 110px; height: auto; object-fit: contain; opacity: 0.92; }
 
-  .brand-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 0 2px;
-  }
+  
 
-  .brand-logo {
-    width: min(180px, 42vw);
-    max-width: 180px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.18));
-  }
+  
 
   @media (max-width: 700px) {
-    .brand-logo {
-      width: min(420px, 94%);
-    }
+    
     footer img {
       width: 96px;
     }
@@ -738,13 +723,38 @@
 
 <div class="container">
 
-  <header>
-    <div class="brand-wrap">
-      <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo" />
-      <div class="brand-title">Energy Calculator</div>
-      <div class="brand-subtitle">Official sizing tool for Chybonsolar Energy Limited</div>
+  <header style="
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  margin-bottom:30px;
+  text-align:left;
+">
+  <img src="logo.png" alt="Chybonsolar Energy Limited"
+       style="width:70px; height:auto; object-fit:contain; margin-top:4px;" />
+  <div>
+    <div style="
+      font-family:'Syne', sans-serif;
+      font-weight:800;
+      font-size:1.5rem;
+      letter-spacing:0.08em;
+      color:#fff;
+      line-height:1.1;
+    ">
+      ENERGY CALCULATOR
     </div>
-  </header>
+    <div style="
+      font-size:0.65rem;
+      color:#7A90A8;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      margin-top:4px;
+    ">
+      Official sizing tool for Chybonsolar Energy Limited
+    </div>
+  </div>
+</header>
 
   <!-- Site Info -->
   <div class="section-title">Project Information</div>
