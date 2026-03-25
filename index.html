@@ -450,212 +450,13 @@
   }
 
   @media (max-width: 700px) {
-    .action-row { grid-template-columns: 1fr; }
-  }
-
-  @media print {
-    body {
-      background: #fff !important;
-      color: #111 !important;
-      font-family: Arial, sans-serif;
-    }
-
-    body::before,
-    .btn-add,
-    .btn-del,
-    .btn-calc,
-    .action-row,
-    footer,
-    .slider-row input,
-    input[type=range] {
-      display: none !important;
-    }
-
-    .container {
-      max-width: 100% !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-
-    .card,
-    .site-row,
-    .result-card,
-    .rec-item,
-    .totals-bar {
-      background: #fff !important;
-      color: #111 !important;
-      border: 1px solid #d9d9d9 !important;
-      box-shadow: none !important;
-      break-inside: avoid;
-    }
-
-    .site-input,
-    .num-input,
-    select {
-      border: none !important;
-      background: transparent !important;
-      color: #111 !important;
-      padding: 0 !important;
-      box-shadow: none !important;
-      appearance: none !important;
-    }
-
-    .section-title,
-    .site-label,
-    .result-label,
-    .tot-label,
-    .rec-title,
-    .subtitle,
-    .hint,
-    .result-unit {
-      color: #444 !important;
-    }
-
-    .load-table th,
-    .load-table td {
-      color: #111 !important;
-      border-color: #e2e2e2 !important;
-      background: transparent !important;
-    }
-
-    .logo-mark {
-      border: 1px solid #d9d9d9 !important;
-      background: #fff !important;
-    }
-
-    .watermark-print {
-      position: fixed;
-      inset: 0;
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .watermark-print img {
-      max-width: 560px;
-      width: 62%;
-      height: auto;
-      opacity: 0.10;
-      transform: rotate(-18deg);
-    }
-  }
-
-  /* Totals bar */
-  .totals-bar {
-    background: var(--panel2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 14px;
-  }
-
-  .tot-item { text-align: center; }
-  .tot-label { font-size: 0.60rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-  .tot-val   { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
-  .tot-val.hi-sun  { color: var(--sun-bright); font-size: 1.1rem; }
-  .tot-val.hi-gold { color: var(--green);      font-size: 1.1rem; }
-
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
-
-  .slider-row { display: flex; align-items: center; gap: 14px; }
-  .slider-row input[type=range] { flex: 1; accent-color: var(--blue); height: 4px; cursor: pointer; }
-
-  .slider-display {
-    background: var(--panel2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 5px 10px;
-    font-size: 0.78rem;
-    color: var(--blue);
-    min-width: 52px;
-    text-align: center;
-  }
-
-  .hint { color: var(--muted); font-size: 0.68rem; margin-top: 4px; line-height: 1.4; }
-
-  .table-wrap { overflow-x: auto; }
-
-  /* Tabs */
-  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
-
-  .tab {
-    padding: 8px 18px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: none;
-    color: var(--muted);
-  }
-
-  .tab.active-day   { background: var(--sun);  border-color: var(--sun);  color: #1A1000; }
-  .tab.active-night { background: var(--blue); border-color: var(--blue); color: #fff; }
-
-  /* Tab hint */
-  .tab-hint {
-    font-size: 0.64rem;
-    color: var(--muted);
-    margin-bottom: 14px;
-    padding: 7px 12px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 6px;
-    border-left: 2px solid var(--border);
-  }
-
-  footer {
-    margin-top: 48px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.68rem;
-    color: var(--muted);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  footer img { width: 110px; height: auto; object-fit: contain; opacity: 0.92; }
-
-  .brand-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 0 2px;
-  }
-
-  .brand-logo {
-    width: min(520px, 92%);
-    height: auto;
-    display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 10px 26px rgba(0,0,0,0.28));
-  }
-
-  @media (max-width: 700px) {
     .brand-logo {
-      width: min(420px, 94%);
+      width: min(240px, 78%);
     }
     footer img {
       width: 96px;
     }
   }
-
   
 
 
@@ -738,8 +539,12 @@
 <div class="container">
 
   <header>
-    <div class="brand-wrap">
+    <div class="brand-wrap" style="flex-direction:column;gap:10px;">
       <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo" />
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.1rem,2.4vw,1.65rem);letter-spacing:0.08em;text-transform:uppercase;color:#fff;">Energy Calculator</div>
+        <div class="subtitle" style="margin-top:6px;">Official sizing tool for Chybonsolar Energy Limited</div>
+      </div>
     </div>
   </header>
 
