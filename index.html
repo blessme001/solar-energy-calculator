@@ -1,10 +1,10 @@
-<<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head></head><body>&lt;
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chybonsolar Energy Calculator</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
 <style>
   :root {
     --sun: #F5A623;
@@ -87,43 +87,6 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-top: 4px;
-  }
-
-  .brand-wrap {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-  }
-
-  .brand-logo {
-    width: min(200px, 46vw);
-    max-width: 200px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.22));
-  }
-
-  .brand-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(0.95rem, 2vw, 1.25rem);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #fff;
-    line-height: 1.15;
-  }
-
-  .brand-subtitle {
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 2px;
   }
 
   .site-row {
@@ -487,13 +450,209 @@
   }
 
   @media (max-width: 700px) {
-    .brand-logo {
-      width: min(160px, 52vw);
-      max-width: 160px;
+    .action-row { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      font-family: Arial, sans-serif;
     }
 
-    .brand-title {
-      font-size: 0.9rem;
+    body::before,
+    .btn-add,
+    .btn-del,
+    .btn-calc,
+    .action-row,
+    footer,
+    .slider-row input,
+    input[type=range] {
+      display: none !important;
+    }
+
+    .container {
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .card,
+    .site-row,
+    .result-card,
+    .rec-item,
+    .totals-bar {
+      background: #fff !important;
+      color: #111 !important;
+      border: 1px solid #d9d9d9 !important;
+      box-shadow: none !important;
+      break-inside: avoid;
+    }
+
+    .site-input,
+    .num-input,
+    select {
+      border: none !important;
+      background: transparent !important;
+      color: #111 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      appearance: none !important;
+    }
+
+    .section-title,
+    .site-label,
+    .result-label,
+    .tot-label,
+    .rec-title,
+    .subtitle,
+    .hint,
+    .result-unit {
+      color: #444 !important;
+    }
+
+    .load-table th,
+    .load-table td {
+      color: #111 !important;
+      border-color: #e2e2e2 !important;
+      background: transparent !important;
+    }
+
+    .logo-mark {
+      border: 1px solid #d9d9d9 !important;
+      background: #fff !important;
+    }
+
+    .watermark-print {
+      position: fixed;
+      inset: 0;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .watermark-print img {
+      max-width: 560px;
+      width: 62%;
+      height: auto;
+      opacity: 0.10;
+      transform: rotate(-18deg);
+    }
+  }
+
+  /* Totals bar */
+  .totals-bar {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .tot-item { text-align: center; }
+  .tot-label { font-size: 0.60rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .tot-val   { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
+  .tot-val.hi-sun  { color: var(--sun-bright); font-size: 1.1rem; }
+  .tot-val.hi-gold { color: var(--green);      font-size: 1.1rem; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  .slider-row { display: flex; align-items: center; gap: 14px; }
+  .slider-row input[type=range] { flex: 1; accent-color: var(--blue); height: 4px; cursor: pointer; }
+
+  .slider-display {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    color: var(--blue);
+    min-width: 52px;
+    text-align: center;
+  }
+
+  .hint { color: var(--muted); font-size: 0.68rem; margin-top: 4px; line-height: 1.4; }
+
+  .table-wrap { overflow-x: auto; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+
+  .tab {
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+    color: var(--muted);
+  }
+
+  .tab.active-day   { background: var(--sun);  border-color: var(--sun);  color: #1A1000; }
+  .tab.active-night { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+  /* Tab hint */
+  .tab-hint {
+    font-size: 0.64rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding: 7px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 6px;
+    border-left: 2px solid var(--border);
+  }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  footer img { width: 110px; height: auto; object-fit: contain; opacity: 0.92; }
+
+  .brand-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0 2px;
+  }
+
+  .brand-logo {
+    width: min(520px, 92%);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 26px rgba(0,0,0,0.28));
+  }
+
+  @media (max-width: 700px) {
+    .brand-logo {
+      width: min(420px, 94%);
+    }
+    footer img {
+      width: 96px;
     }
   }
 
@@ -574,15 +733,13 @@
   .col-night { background: rgba(74,163,255,0.08) !important; }
 
 </style>
-</head>
-<body>
+
+
 <div class="container">
 
   <header>
     <div class="brand-wrap">
-      <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo" />
-      <div class="brand-title">Energy Calculator</div>
-      <div class="brand-subtitle">Official sizing tool for Chybonsolar Energy Limited</div>
+      <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo">
     </div>
   </header>
 
@@ -590,17 +747,17 @@
   <div class="section-title">Project Information</div>
   <div class="site-row">
     <div class="site-label">Project Owner</div>
-    <input type="text" class="site-input" id="projectOwner" placeholder="e.g. Mr. Adewale" />
+    <input type="text" class="site-input" id="projectOwner" placeholder="e.g. Mr. Adewale">
     <div class="site-label">Project Location</div>
-    <input type="text" class="site-input" id="projectLocation" placeholder="e.g. Ojodu Residence, Lagos" />
+    <input type="text" class="site-input" id="projectLocation" placeholder="e.g. Ojodu Residence, Lagos">
     <div class="site-label">Roof Type</div>
-    <input type="text" class="site-input" id="roofType" placeholder="e.g. Long span, concrete, flat roof" />
+    <input type="text" class="site-input" id="roofType" placeholder="e.g. Long span, concrete, flat roof">
     <div class="site-label">Roof Orientation</div>
-    <input type="text" class="site-input" id="roofOrientation" placeholder="e.g. South-facing" />
+    <input type="text" class="site-input" id="roofOrientation" placeholder="e.g. South-facing">
     <div class="site-label">System Voltage</div>
     <select id="sysVoltage" class="site-input" style="max-width:140px">
       <option value="12">12V</option>
-      <option value="24" selected>24V</option>
+      <option value="24" selected="">24V</option>
       <option value="48">48V</option>
       <option value="51.2">51.2V</option>
     </select>
@@ -620,13 +777,173 @@
             <th class="col-r metric-raw">Power × Qty</th>
             <th class="col-r">Inv. Factor</th>
             <th class="col-r metric-inv">(Power × Qty) × Inv</th>
-            <th class="col-r col-day metric-day" style="color:var(--sun)"><input type="text" class="num-input" id="dayLabel" value="Day Hours" style="text-align:center;min-width:110px" /></th>
-            <th class="col-r col-night metric-night" style="color:var(--blue)"><input type="text" class="num-input" id="nightLabel" value="Night Hours" style="text-align:center;min-width:110px" /></th>
+            <th class="col-r col-day metric-day" style="color:var(--sun)"><input type="text" class="num-input" id="dayLabel" value="Day Hours" style="text-align:center;min-width:110px"></th>
+            <th class="col-r col-night metric-night" style="color:var(--blue)"><input type="text" class="num-input" id="nightLabel" value="Night Hours" style="text-align:center;min-width:110px"></th>
             <th class="col-r metric-time">Energy With Time (Wh)</th>
             <th></th>
           </tr>
         </thead>
-        <tbody id="loadBody"></tbody>
+        <tbody id="loadBody"><tr>
+      <td class="td-label">1</td>
+      <td>
+        <select class="num-input" style="text-align:left;min-width:120px" onchange="selectAppliance(${load.id}, this.value)">
+          ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
+        </select>
+      </td>
+      <td>
+        <input type="number" class="num-input" value="15" min="0" step="1" onchange="loads.find(l=&gt;l.id==0).power=+this.value;calculate();renderTable()">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="10" min="1" step="1" style="width:60px" onchange="loads.find(l=&gt;l.id==0).qty=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-raw">150</td>
+      <td>
+        <select class="num-input" onchange="loads.find(l=&gt;l.id==0).inv=+this.value;calculate();renderTable()">
+          <option value="0">0</option>
+          <option value="1" selected="">1</option>
+          <option value="1.3">1.3</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </td>
+      <td class="td-result-inv metric-inv">150</td>
+      <td class="col-day">
+        <input type="number" class="num-input inp-day" value="0" min="0" max="24" step="0.5" title="Daytime hours" onchange="loads.find(l=&gt;l.id==0).dayHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="col-night">
+        <input type="number" class="num-input inp-night" value="6" min="0" max="24" step="0.5" title="Nighttime hours" onchange="loads.find(l=&gt;l.id==0).nightHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-time">900</td>
+      <td><button class="btn-del" onclick="removeRow(0)">✕</button></td>
+    </tr><tr>
+      <td class="td-label">2</td>
+      <td>
+        <select class="num-input" style="text-align:left;min-width:120px" onchange="selectAppliance(${load.id}, this.value)">
+          ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
+        </select>
+      </td>
+      <td>
+        <input type="number" class="num-input" value="150" min="0" step="1" onchange="loads.find(l=&gt;l.id==1).power=+this.value;calculate();renderTable()">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="1" min="1" step="1" style="width:60px" onchange="loads.find(l=&gt;l.id==1).qty=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-raw">150</td>
+      <td>
+        <select class="num-input" onchange="loads.find(l=&gt;l.id==1).inv=+this.value;calculate();renderTable()">
+          <option value="0">0</option>
+          <option value="1" selected="">1</option>
+          <option value="1.3">1.3</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </td>
+      <td class="td-result-inv metric-inv">150</td>
+      <td class="col-day">
+        <input type="number" class="num-input inp-day" value="12" min="0" max="24" step="0.5" title="Daytime hours" onchange="loads.find(l=&gt;l.id==1).dayHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="col-night">
+        <input type="number" class="num-input inp-night" value="12" min="0" max="24" step="0.5" title="Nighttime hours" onchange="loads.find(l=&gt;l.id==1).nightHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-time">3600</td>
+      <td><button class="btn-del" onclick="removeRow(1)">✕</button></td>
+    </tr><tr>
+      <td class="td-label">3</td>
+      <td>
+        <select class="num-input" style="text-align:left;min-width:120px" onchange="selectAppliance(${load.id}, this.value)">
+          ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
+        </select>
+      </td>
+      <td>
+        <input type="number" class="num-input" value="80" min="0" step="1" onchange="loads.find(l=&gt;l.id==2).power=+this.value;calculate();renderTable()">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="1" min="1" step="1" style="width:60px" onchange="loads.find(l=&gt;l.id==2).qty=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-raw">80</td>
+      <td>
+        <select class="num-input" onchange="loads.find(l=&gt;l.id==2).inv=+this.value;calculate();renderTable()">
+          <option value="0">0</option>
+          <option value="1" selected="">1</option>
+          <option value="1.3">1.3</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </td>
+      <td class="td-result-inv metric-inv">80</td>
+      <td class="col-day">
+        <input type="number" class="num-input inp-day" value="2" min="0" max="24" step="0.5" title="Daytime hours" onchange="loads.find(l=&gt;l.id==2).dayHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="col-night">
+        <input type="number" class="num-input inp-night" value="4" min="0" max="24" step="0.5" title="Nighttime hours" onchange="loads.find(l=&gt;l.id==2).nightHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-time">480</td>
+      <td><button class="btn-del" onclick="removeRow(2)">✕</button></td>
+    </tr><tr>
+      <td class="td-label">4</td>
+      <td>
+        <select class="num-input" style="text-align:left;min-width:120px" onchange="selectAppliance(${load.id}, this.value)">
+          ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
+        </select>
+      </td>
+      <td>
+        <input type="number" class="num-input" value="60" min="0" step="1" onchange="loads.find(l=&gt;l.id==3).power=+this.value;calculate();renderTable()">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="2" min="1" step="1" style="width:60px" onchange="loads.find(l=&gt;l.id==3).qty=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-raw">120</td>
+      <td>
+        <select class="num-input" onchange="loads.find(l=&gt;l.id==3).inv=+this.value;calculate();renderTable()">
+          <option value="0">0</option>
+          <option value="1" selected="">1</option>
+          <option value="1.3">1.3</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </td>
+      <td class="td-result-inv metric-inv">120</td>
+      <td class="col-day">
+        <input type="number" class="num-input inp-day" value="4" min="0" max="24" step="0.5" title="Daytime hours" onchange="loads.find(l=&gt;l.id==3).dayHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="col-night">
+        <input type="number" class="num-input inp-night" value="4" min="0" max="24" step="0.5" title="Nighttime hours" onchange="loads.find(l=&gt;l.id==3).nightHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-time">960</td>
+      <td><button class="btn-del" onclick="removeRow(3)">✕</button></td>
+    </tr><tr>
+      <td class="td-label">5</td>
+      <td>
+        <select class="num-input" style="text-align:left;min-width:120px" onchange="selectAppliance(${load.id}, this.value)">
+          ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
+        </select>
+      </td>
+      <td>
+        <input type="number" class="num-input" value="20" min="0" step="1" onchange="loads.find(l=&gt;l.id==4).power=+this.value;calculate();renderTable()">
+      </td>
+      <td>
+        <input type="number" class="num-input" value="4" min="1" step="1" style="width:60px" onchange="loads.find(l=&gt;l.id==4).qty=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-raw">80</td>
+      <td>
+        <select class="num-input" onchange="loads.find(l=&gt;l.id==4).inv=+this.value;calculate();renderTable()">
+          <option value="0">0</option>
+          <option value="1" selected="">1</option>
+          <option value="1.3">1.3</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </td>
+      <td class="td-result-inv metric-inv">80</td>
+      <td class="col-day">
+        <input type="number" class="num-input inp-day" value="4" min="0" max="24" step="0.5" title="Daytime hours" onchange="loads.find(l=&gt;l.id==4).dayHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="col-night">
+        <input type="number" class="num-input inp-night" value="0" min="0" max="24" step="0.5" title="Nighttime hours" onchange="loads.find(l=&gt;l.id==4).nightHrs=+this.value;calculate();renderTable()">
+      </td>
+      <td class="td-result metric-time">320</td>
+      <td><button class="btn-del" onclick="removeRow(4)">✕</button></td>
+    </tr></tbody>
       </table>
     </div>
 
@@ -635,31 +952,31 @@
     <div class="totals-bar">
       <div class="tot-item">
         <div class="tot-label metric-raw">Power × Qty</div>
-        <div class="tot-val energy-raw" id="totBase">0 W</div>
+        <div class="tot-val energy-raw" id="totBase">580 W</div>
       </div>
       <div class="tot-item">
         <div class="tot-label metric-inv">(Power × Qty) × Inv</div>
-        <div class="tot-val energy-inv" id="totBaseInv">0 W</div>
+        <div class="tot-val energy-inv" id="totBaseInv">580 W</div>
       </div>
       <div class="tot-item">
         <div class="tot-label metric-time">Energy With Time</div>
-        <div class="tot-val energy-time" id="totWh">0 Wh</div>
+        <div class="tot-val energy-time" id="totWh">6260 Wh</div>
       </div>
       <div class="tot-item">
         <div class="tot-label metric-day">Day Energy</div>
-        <div class="tot-val energy-day" id="totDay">0 Wh</div>
+        <div class="tot-val energy-day" id="totDay">2760 Wh</div>
       </div>
       <div class="tot-item">
         <div class="tot-label metric-night">Night Energy</div>
-        <div class="tot-val energy-night" id="totNight">0 Wh</div>
+        <div class="tot-val energy-night" id="totNight">3500 Wh</div>
       </div>
       <div class="tot-item">
         <div class="tot-label metric-peak">Peak Load</div>
-        <div class="tot-val energy-peak" id="totPeak">0 W</div>
+        <div class="tot-val energy-peak" id="totPeak">580 W</div>
       </div>
       <div class="tot-item">
         <div class="tot-label metric-avg">Load Average</div>
-        <div class="tot-val energy-avg" id="totAvg">0 W</div>
+        <div class="tot-val energy-avg" id="totAvg">260.8 W</div>
       </div>
     </div>
   </div>
@@ -784,48 +1101,49 @@
     <div class="results-grid">
       <div class="result-card solar">
         <div class="result-label">Solar Array</div>
-        <div class="result-value solar" id="rPanels">—</div>
-        <div class="result-unit" id="rPanelsUnit">panels required</div>
+        <div class="result-value solar" id="rPanels">5</div>
+        <div class="result-unit" id="rPanelsUnit">panels (475Wp each) · calc 4.1 min</div>
       </div>
       <div class="result-card solar">
         <div class="result-label">Array Size (EoL)</div>
-        <div class="result-value solar" id="rArrayWp">—</div>
+        <div class="result-value solar" id="rArrayWp">1.90 kWp</div>
         <div class="result-unit">Wp (end of life)</div>
       </div>
       <div class="result-card battery">
         <div class="result-label">Battery Bank (EoL)</div>
-        <div class="result-value battery" id="rBattAh">—</div>
+        <div class="result-value battery" id="rBattAh">527</div>
         <div class="result-unit">Ah required</div>
       </div>
       <div class="result-card battery">
         <div class="result-label">No. of Batteries</div>
-        <div class="result-value battery" id="rBattCount">—</div>
-        <div class="result-unit" id="rBattUnit">units in parallel</div>
+        <div class="result-value battery" id="rBattCount">3</div>
+        <div class="result-unit" id="rBattUnit">× 100Ah = 15.36 kWh · Avail 410Ah · DOD 80% · Min SOC 20% · 1.6 day(s)</div>
       </div>
       <div class="result-card inverter">
         <div class="result-label">Inverter Size</div>
-        <div class="result-value inverter" id="rInverter">—</div>
+        <div class="result-value inverter" id="rInverter">0.8</div>
         <div class="result-unit">kW recommended</div>
       </div>
       <div class="result-card controller">
         <div class="result-label">Charge Controller</div>
-        <div class="result-value controller" id="rController">—</div>
+        <div class="result-value controller" id="rController">130</div>
         <div class="result-unit">A (MPPT)</div>
       </div>
     </div>
 
     <div class="section-title" style="margin-top:24px">Recommended Products</div>
     <div class="rec-grid">
-      <div class="rec-item"><div class="rec-icon">☀️</div><div><div class="rec-title">Solar Panels</div><div class="rec-val" id="recPanels">—</div></div></div>
-      <div class="rec-item"><div class="rec-icon">🔋</div><div><div class="rec-title">Battery System</div><div class="rec-val" id="recBatt">—</div></div></div>
-      <div class="rec-item"><div class="rec-icon">⚡</div><div><div class="rec-title">Hybrid Inverter</div><div class="rec-val" id="recInverter">—</div></div></div>
-      <div class="rec-item"><div class="rec-icon">🎛️</div><div><div class="rec-title">Charge Controller</div><div class="rec-val" id="recController">—</div></div></div>
+      <div class="rec-item"><div class="rec-icon">☀️</div><div><div class="rec-title">Solar Panels</div><div class="rec-val" id="recPanels">5 × 475W Solar Panels (2.38 kWp installed)</div></div></div>
+      <div class="rec-item"><div class="rec-icon">🔋</div><div><div class="rec-title">Battery System</div><div class="rec-val" id="recBatt">3 × 5.12kWh LiFePO4 Battery (15.36 kWh)</div></div></div>
+      <div class="rec-item"><div class="rec-icon">⚡</div><div><div class="rec-title">Hybrid Inverter</div><div class="rec-val" id="recInverter">1kW Hybrid Inverter</div></div></div>
+      <div class="rec-item"><div class="rec-icon">🎛️</div><div><div class="rec-title">Charge Controller</div><div class="rec-val" id="recController">150A MPPT Charge Controller</div></div></div>
     </div>
   </div>
 
-  <div class="watermark-print" style="display:none"><img src="logo.png" alt="Chybonsolar watermark" /></div>
+  <div class="watermark-print" style="display:none"><img src="logo.png" alt="Chybonsolar watermark"></div>
 
   <footer>
+    <img src="logo.png" alt="Chybonsolar">
     Chybonsolar Energy Limited &nbsp;·&nbsp; Off-Grid Solar System Sizing Tool &nbsp;·&nbsp; Results are estimates — consult a qualified engineer
   </footer>
 
@@ -945,15 +1263,9 @@ function renderTable() {
     tr.innerHTML = `
       <td class="td-label">${i + 1}</td>
       <td>
-        <div style="display:flex;flex-direction:column;gap:6px;min-width:170px">
-          <select class="num-input" style="text-align:left" onchange="selectAppliance(${load.id}, this.value)">
-            ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
-          </select>
-          <input type="text" class="num-input" list="applianceOptions" style="text-align:left;display:${applianceCatalog.includes(load.name) ? 'none' : 'block'}"
-            value="${applianceCatalog.includes(load.name) ? '' : load.name}"
-            placeholder="Add custom appliance"
-            onchange="setCustomAppliance(${load.id}, this.value)">
-        </div>
+        <select class="num-input" style="text-align:left;min-width:120px" onchange="selectAppliance(${load.id}, this.value)">
+          ${applianceCatalog.map(name => `<option value="${name}" ${load.name===name ? 'selected' : ''}>${name}</option>`).join('')}
+        </select>
       </td>
       <td>
         <input type="number" class="num-input" value="${load.power}" min="0" step="1"
@@ -1000,22 +1312,10 @@ function renderTable() {
 function selectAppliance(id, selectedName) {
   const target = loads.find(l => l.id === id);
   if (!target) return;
-  if (selectedName === 'OTHER / CUSTOM') {
-    target.name = '';
-  } else {
-    target.name = selectedName;
-    if (Object.prototype.hasOwnProperty.call(appliancePowerMap, selectedName)) {
-      target.power = appliancePowerMap[selectedName];
-    }
+  target.name = selectedName;
+  if (selectedName !== 'OTHER / CUSTOM' && Object.prototype.hasOwnProperty.call(appliancePowerMap, selectedName)) {
+    target.power = appliancePowerMap[selectedName];
   }
-  renderTable();
-  calculate();
-}
-
-function setCustomAppliance(id, value) {
-  const target = loads.find(l => l.id === id);
-  if (!target) return;
-  target.name = value.trim();
   renderTable();
   calculate();
 }
@@ -1041,21 +1341,21 @@ function removeRow(id) {
 // Night Energy          = power × qty × inv × nightHrs
 // ─────────────────────────────────────────────────────────────
 function updateTotals() {
-  const totalBase      = loads.reduce((s, l) => s + l.power * l.qty,                                     0);
-  const totalBaseInv   = loads.reduce((s, l) => s + l.power * l.qty * l.inv,                             0);
-  const totalEnergy    = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs) * l.inv,  0);
-  const dayWh          = loads.reduce((s, l) => s + l.power * l.qty * l.dayHrs   * l.inv,               0);
-  const nightWh        = loads.reduce((s, l) => s + l.power * l.qty * l.nightHrs * l.inv,               0);
-  const peakW          = totalBase;
-  const avgW           = totalEnergy / 24;
+  const totalBase = loads.reduce((s, l) => s + l.power * l.qty, 0);
+  const totalBaseInv = loads.reduce((s, l) => s + l.power * l.qty * l.inv, 0);
+  const totalEnergy = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs) * l.inv, 0);
+  const dayWh = loads.reduce((s, l) => s + l.power * l.qty * l.dayHrs * l.inv, 0);
+  const nightWh = loads.reduce((s, l) => s + l.power * l.qty * l.nightHrs * l.inv, 0);
+  const peakW = totalBase;
+  const avgW = totalEnergy / 24;
 
-  document.getElementById('totBase').textContent    = totalBase.toFixed(0)    + ' W';
+  document.getElementById('totBase').textContent = totalBase.toFixed(0) + ' W';
   document.getElementById('totBaseInv').textContent = totalBaseInv.toFixed(0) + ' W';
-  document.getElementById('totWh').textContent      = totalEnergy.toFixed(0)  + ' Wh';
-  document.getElementById('totDay').textContent     = dayWh.toFixed(0)        + ' Wh';
-  document.getElementById('totNight').textContent   = nightWh.toFixed(0)      + ' Wh';
-  document.getElementById('totPeak').textContent    = peakW.toFixed(0)        + ' W';
-  document.getElementById('totAvg').textContent     = avgW.toFixed(1)         + ' W';
+  document.getElementById('totWh').textContent = totalEnergy.toFixed(0) + ' Wh';
+  document.getElementById('totDay').textContent = dayWh.toFixed(0) + ' Wh';
+  document.getElementById('totNight').textContent = nightWh.toFixed(0) + ' Wh';
+  document.getElementById('totPeak').textContent = peakW.toFixed(0) + ' W';
+  document.getElementById('totAvg').textContent = avgW.toFixed(1) + ' W';
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -1537,7 +1837,5 @@ renderTable();
 calculate();
 </script>
 
-<datalist id="applianceOptions">
-  ${applianceCatalog.filter(name => name !== 'OTHER / CUSTOM').map(name => `<option value="${name}"></option>`).join('')}
-</datalist>
-</bo
+
+</body></html>
