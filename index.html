@@ -626,9 +626,35 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
+    flex-wrap: wrap;
   }
 
-  footer img { width: 28px; height: 28px; object-fit: contain; opacity: 0.7; }
+  footer img { width: 110px; height: auto; object-fit: contain; opacity: 0.92; }
+
+  .brand-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0 2px;
+  }
+
+  .brand-logo {
+    width: min(520px, 92%);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 26px rgba(0,0,0,0.28));
+  }
+
+  @media (max-width: 700px) {
+    .brand-logo {
+      width: min(420px, 94%);
+    }
+    footer img {
+      width: 96px;
+    }
+  }
 
   
 
@@ -712,8 +738,8 @@
 <div class="container">
 
   <header>
-    <div style="width:100%;display:flex;justify-content:center;align-items:center;padding:8px 0 4px;">
-      <img src="/mnt/data/0d5dd73b-810d-4cc6-a923-6b46e9ff92c9.png" alt="Chybonsolar Energy Limited" style="max-width:min(760px,94%);width:100%;height:auto;display:block;filter:drop-shadow(0 8px 22px rgba(0,0,0,0.22));" />
+    <div class="brand-wrap">
+      <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo" />
     </div>
   </header>
 
@@ -954,10 +980,10 @@
     </div>
   </div>
 
-  <div class="watermark-print" style="display:none"><img src="/mnt/data/0d5dd73b-810d-4cc6-a923-6b46e9ff92c9.png" alt="Chybonsolar watermark" /></div>
+  <div class="watermark-print" style="display:none"><img src="logo.png" alt="Chybonsolar watermark" /></div>
 
   <footer>
-    <img src="/mnt/data/0d5dd73b-810d-4cc6-a923-6b46e9ff92c9.png" alt="Chybonsolar" style="width:120px;height:auto;object-fit:contain;opacity:0.9;" />
+    <img src="logo.png" alt="Chybonsolar" />
     Chybonsolar Energy Limited &nbsp;·&nbsp; Off-Grid Solar System Sizing Tool &nbsp;·&nbsp; Results are estimates — consult a qualified engineer
   </footer>
 
@@ -1451,11 +1477,11 @@ function generatePrintableReport() {
     <body>
       <div class="page">
         <div class="sheet">
-          <div class="watermark"><img src="/mnt/data/0d5dd73b-810d-4cc6-a923-6b46e9ff92c9.png" alt="Chybonsolar watermark" /></div>
+          <div class="watermark"><img src="logo.png" alt="Chybonsolar watermark" /></div>
           <div class="content">
             <div class="topbar">
               <div style="display:flex;align-items:center;gap:16px;">
-                <img src="/mnt/data/0d5dd73b-810d-4cc6-a923-6b46e9ff92c9.png" alt="Chybonsolar Energy Limited" style="width:210px;height:auto;display:block;" />
+                <img src="logo.png" alt="Chybonsolar Energy Limited" style="width:220px;height:auto;display:block;object-fit:contain;" />
                 <div>
                   <div class="muted" style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;">Off-Grid Solar System Sizing Summary</div>
                   <h1 style="margin-top:6px;">Project Engineering Report</h1>
