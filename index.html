@@ -89,6 +89,43 @@
     margin-top: 4px;
   }
 
+  .brand-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .brand-logo {
+    width: min(200px, 46vw);
+    max-width: 200px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.22));
+  }
+
+  .brand-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(0.95rem, 2vw, 1.25rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.15;
+  }
+
+  .brand-subtitle {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
   .site-row {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -451,10 +488,12 @@
 
   @media (max-width: 700px) {
     .brand-logo {
-      width: min(240px, 78%);
+      width: min(160px, 52vw);
+      max-width: 160px;
     }
-    footer img {
-      width: 96px;
+
+    .brand-title {
+      font-size: 0.9rem;
     }
   }
 
@@ -540,12 +579,10 @@
 <div class="container">
 
   <header>
-    <div class="brand-wrap" style="flex-direction:column;gap:10px;">
+    <div class="brand-wrap">
       <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo" />
-      <div style="text-align:center;">
-        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.1rem,2.4vw,1.65rem);letter-spacing:0.08em;text-transform:uppercase;color:#fff;">Energy Calculator</div>
-        <div class="subtitle" style="margin-top:6px;">Official sizing tool for Chybonsolar Energy Limited</div>
-      </div>
+      <div class="brand-title">Energy Calculator</div>
+      <div class="brand-subtitle">Official sizing tool for Chybonsolar Energy Limited</div>
     </div>
   </header>
 
@@ -789,7 +826,6 @@
   <div class="watermark-print" style="display:none"><img src="logo.png" alt="Chybonsolar watermark" /></div>
 
   <footer>
-    <img src="logo.png" alt="Chybonsolar" />
     Chybonsolar Energy Limited &nbsp;·&nbsp; Off-Grid Solar System Sizing Tool &nbsp;·&nbsp; Results are estimates — consult a qualified engineer
   </footer>
 
