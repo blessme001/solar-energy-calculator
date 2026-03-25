@@ -640,11 +640,12 @@
   }
 
   .brand-logo {
-    width: min(520px, 92%);
+    width: min(180px, 42vw);
+    max-width: 180px;
     height: auto;
     display: block;
     object-fit: contain;
-    filter: drop-shadow(0 10px 26px rgba(0,0,0,0.28));
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.18));
   }
 
   @media (max-width: 700px) {
@@ -739,7 +740,9 @@
 
   <header>
     <div class="brand-wrap">
-      <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo">
+      <img src="logo.png" alt="Chybonsolar Energy Limited" class="brand-logo" />
+      <div class="brand-title">Energy Calculator</div>
+      <div class="brand-subtitle">Official sizing tool for Chybonsolar Energy Limited</div>
     </div>
   </header>
 
@@ -1143,7 +1146,6 @@
   <div class="watermark-print" style="display:none"><img src="logo.png" alt="Chybonsolar watermark"></div>
 
   <footer>
-    <img src="logo.png" alt="Chybonsolar">
     Chybonsolar Energy Limited &nbsp;·&nbsp; Off-Grid Solar System Sizing Tool &nbsp;·&nbsp; Results are estimates — consult a qualified engineer
   </footer>
 
