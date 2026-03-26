@@ -352,6 +352,25 @@
     margin-top: 4px;
   }
 
+
+  .rec-edit {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    line-height: 1.25;
+    outline: none;
+    resize: vertical;
+    min-height: 72px;
+  }
+
+  .rec-edit::placeholder {
+    color: #8fa3bb;
+  }
+
   .rec-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -481,7 +500,79 @@
     .site-row,
     .result-card,
     .rec-item,
-    .totals-bar {
+
+  .totals-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+   .unit-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 10px;
+    flex-wrap: wrap;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.01);
+  }
+
+  .unit-toggle-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 2px;
+  }
+
+  .unit-toggle button {
+    appearance: none;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 88px;
+  }
+
+  .unit-toggle button:hover {
+    border-color: var(--sun);
+    color: var(--sun-bright);
+    transform: translateY(-1px);
+  }
+
+  .unit-toggle button.active {
+    border-color: var(--sun);
+    color: #1A1000;
+    background: linear-gradient(135deg, var(--sun), var(--sun-bright));
+    box-shadow: 0 4px 14px rgba(245,166,35,0.22);
+  }
+
+  @media (max-width: 700px) {
+    .totals-head {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .unit-toggle {
+      justify-content: center;
+    }
+  }
+
+  .totals-bar {
       background: #fff !important;
       color: #111 !important;
       border: 1px solid #d9d9d9 !important;
@@ -631,36 +722,36 @@
 
   footer img { width: 110px; height: auto; object-fit: contain; opacity: 0.92; }
 
-  
 
-  
+
+
 
   @media (max-width: 700px) {
-    
+
     footer img {
       width: 96px;
     }
   }
 
-  
 
 
-  
 
 
-  
 
 
-  
 
 
-  
 
 
-  
 
 
-  
+
+
+
+
+
+
+
   /* FINAL clean metric color system */
   th.metric-raw,
   .tot-label.metric-raw,
@@ -727,13 +818,13 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:16px;
+  gap:18px;
   margin-bottom:30px;
   text-align:left;
 ">
   <img src="logo.png" alt="Chybonsolar Energy Limited"
-       style="width:110px; height:auto; object-fit:contain; margin-top:4px;" />
-  <div>
+       style="width:132px; height:auto; object-fit:contain; filter:drop-shadow(0 8px 20px rgba(0,0,0,0.22));" />
+  <div style="display:flex; flex-direction:column; justify-content:center;">
     <div style="
       font-family:'Syne', sans-serif;
       font-weight:800;
@@ -749,7 +840,8 @@
       color:#7A90A8;
       letter-spacing:0.18em;
       text-transform:uppercase;
-      margin-top:4px;
+      margin-top:6px;
+      line-height:1.4;
     ">
       Official sizing tool for Chybonsolar Energy Limited
     </div>
@@ -759,8 +851,8 @@
   <!-- Site Info -->
   <div class="section-title">Project Information</div>
   <div class="site-row">
-    <div class="site-label">Project Owner</div>
-    <input type="text" class="site-input" id="projectOwner" placeholder="e.g. Mr. Adewale">
+    <div class="site-label">Project Name</div>
+    <input type="text" class="site-input" id="projectOwner" placeholder="e.g. 3 Bedroom Apartment Solar Setup">
     <div class="site-label">Project Location</div>
     <input type="text" class="site-input" id="projectLocation" placeholder="e.g. Ojodu Residence, Lagos">
     <div class="site-label">Roof Type</div>
@@ -962,25 +1054,34 @@
 
     <button class="btn-add" onclick="addRow()">+ Add Appliance</button>
 
+    <div class="totals-head">
+      <div class="unit-toggle-label" style="visibility:hidden">Display Unit</div>
+      <div class="unit-toggle">
+        <span class="unit-toggle-label">Display Unit</span>
+        <button type="button" id="unitWBtn" class="active" onclick="setDisplayUnit('W')">Watt</button>
+        <button type="button" id="unitKWBtn" onclick="setDisplayUnit('kW')">Kilowatt</button>
+      </div>
+    </div>
+
     <div class="totals-bar">
       <div class="tot-item">
-        <div class="tot-label metric-raw">Power × Qty</div>
+        <div class="tot-label metric-raw">Total Power</div>
         <div class="tot-val energy-raw" id="totBase">580 W</div>
       </div>
       <div class="tot-item">
-        <div class="tot-label metric-inv">(Power × Qty) × Inv</div>
+        <div class="tot-label metric-inv">Total Power(Inv)</div>
         <div class="tot-val energy-inv" id="totBaseInv">580 W</div>
       </div>
       <div class="tot-item">
-        <div class="tot-label metric-time">Energy With Time</div>
+        <div class="tot-label metric-time">Total Daily Energy</div>
         <div class="tot-val energy-time" id="totWh">6260 Wh</div>
       </div>
       <div class="tot-item">
-        <div class="tot-label metric-day">Day Energy</div>
+        <div class="tot-label metric-day">Day Time</div>
         <div class="tot-val energy-day" id="totDay">2760 Wh</div>
       </div>
       <div class="tot-item">
-        <div class="tot-label metric-night">Night Energy</div>
+        <div class="tot-label metric-night">Night Time</div>
         <div class="tot-val energy-night" id="totNight">3500 Wh</div>
       </div>
       <div class="tot-item">
@@ -988,7 +1089,7 @@
         <div class="tot-val energy-peak" id="totPeak">580 W</div>
       </div>
       <div class="tot-item">
-        <div class="tot-label metric-avg">Load Average</div>
+        <div class="tot-label metric-avg">Daily Load Average</div>
         <div class="tot-val energy-avg" id="totAvg">260.8 W</div>
       </div>
     </div>
@@ -1035,11 +1136,18 @@
             <div class="slider-display" id="dirtDisp">10%</div>
           </div>
         </div>
-        <div>
+        <div style="margin-bottom:14px">
           <label style="display:block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Excess Power &amp; Design Margin</label>
           <div class="slider-row">
             <input type="range" id="excessSlider" min="5" max="30" value="10" oninput="updateSlider('excess',this.value);calculate()">
             <div class="slider-display" id="excessDisp">10%</div>
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Others</label>
+          <div class="slider-row">
+            <input type="range" id="othersSlider" min="0" max="30" value="0" oninput="updateSlider('others',this.value);calculate()">
+            <div class="slider-display" id="othersDisp">0%</div>
           </div>
         </div>
       </div>
@@ -1146,10 +1254,10 @@
 
     <div class="section-title" style="margin-top:24px">Recommended Products</div>
     <div class="rec-grid">
-      <div class="rec-item"><div class="rec-icon">☀️</div><div><div class="rec-title">Solar Panels</div><div class="rec-val" id="recPanels">5 × 475W Solar Panels (2.38 kWp installed)</div></div></div>
-      <div class="rec-item"><div class="rec-icon">🔋</div><div><div class="rec-title">Battery System</div><div class="rec-val" id="recBatt">3 × 5.12kWh LiFePO4 Battery (15.36 kWh)</div></div></div>
-      <div class="rec-item"><div class="rec-icon">⚡</div><div><div class="rec-title">Hybrid Inverter</div><div class="rec-val" id="recInverter">1kW Hybrid Inverter</div></div></div>
-      <div class="rec-item"><div class="rec-icon">🎛️</div><div><div class="rec-title">Charge Controller</div><div class="rec-val" id="recController">150A MPPT Charge Controller</div></div></div>
+      <div class="rec-item"><div class="rec-icon">☀️</div><div style="width:100%"><div class="rec-title">Solar Panels</div><textarea class="rec-edit" id="recPanels">5 × 475W Solar Panels (2.38 kWp installed)</textarea></div></div>
+      <div class="rec-item"><div class="rec-icon">🔋</div><div style="width:100%"><div class="rec-title">Battery System</div><textarea class="rec-edit" id="recBatt">3 × 5.12kWh LiFePO4 Battery (15.36 kWh)</textarea></div></div>
+      <div class="rec-item"><div class="rec-icon">⚡</div><div style="width:100%"><div class="rec-title">Hybrid Inverter</div><textarea class="rec-edit" id="recInverter">1kW Hybrid Inverter</textarea></div></div>
+      <div class="rec-item"><div class="rec-icon">🎛️</div><div style="width:100%"><div class="rec-title">Charge Controller</div><textarea class="rec-edit" id="recController">150A MPPT Charge Controller</textarea></div></div>
     </div>
   </div>
 
@@ -1254,6 +1362,22 @@ const defaultLoads = [
 let loads   = defaultLoads.map((l, i) => ({ ...l, id: i }));
 let nextId  = loads.length;
 let activeTab = 'day'; // tabs removed; table remains fully visible on one page
+let displayUnit = 'W';
+
+function formatDisplayPower(valueW, kind = 'power') {
+  if (displayUnit === 'kW') {
+    const valueKW = valueW / 1000;
+    return `${valueKW.toFixed(2)} kW`;
+  }
+  return kind === 'energy' ? `${valueW.toFixed(0)} Wh` : `${valueW.toFixed(0)} W`;
+}
+
+function setDisplayUnit(unit) {
+  displayUnit = unit;
+  document.getElementById('unitWBtn')?.classList.toggle('active', unit === 'W');
+  document.getElementById('unitKWBtn')?.classList.toggle('active', unit === 'kW');
+  updateTotals();
+}
 
 // ─────────────────────────────────────────────────────────────
 // RENDER — shows ALL loads always; both hrs columns visible;
@@ -1269,7 +1393,7 @@ function renderTable() {
     // 2) Base load × inverter factor (still no time)
     const baseLoadInv   = baseLoad * load.inv;
     // 3) Final energy with time
-    const timedEnergy   = baseLoadInv * (load.dayHrs + load.nightHrs);
+    const timedEnergy   = baseLoad * (load.dayHrs + load.nightHrs);
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -1355,26 +1479,26 @@ function removeRow(id) {
 function updateTotals() {
   const totalBase = loads.reduce((s, l) => s + l.power * l.qty, 0);
   const totalBaseInv = loads.reduce((s, l) => s + l.power * l.qty * l.inv, 0);
-  const totalEnergy = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs) * l.inv, 0);
-  const dayWh = loads.reduce((s, l) => s + l.power * l.qty * l.dayHrs * l.inv, 0);
-  const nightWh = loads.reduce((s, l) => s + l.power * l.qty * l.nightHrs * l.inv, 0);
+  const totalEnergy = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs), 0);
+  const dayWh = loads.reduce((s, l) => s + l.power * l.qty * l.dayHrs, 0);
+  const nightWh = loads.reduce((s, l) => s + l.power * l.qty * l.nightHrs, 0);
   const peakW = totalBase;
   const avgW = totalEnergy / 24;
 
-  document.getElementById('totBase').textContent = totalBase.toFixed(0) + ' W';
-  document.getElementById('totBaseInv').textContent = totalBaseInv.toFixed(0) + ' W';
-  document.getElementById('totWh').textContent = totalEnergy.toFixed(0) + ' Wh';
-  document.getElementById('totDay').textContent = dayWh.toFixed(0) + ' Wh';
-  document.getElementById('totNight').textContent = nightWh.toFixed(0) + ' Wh';
-  document.getElementById('totPeak').textContent = peakW.toFixed(0) + ' W';
-  document.getElementById('totAvg').textContent = avgW.toFixed(1) + ' W';
+  document.getElementById('totBase').textContent = formatDisplayPower(totalBase, 'power');
+  document.getElementById('totBaseInv').textContent = formatDisplayPower(totalBaseInv, 'power');
+  document.getElementById('totWh').textContent = formatDisplayPower(totalEnergy, 'energy');
+  document.getElementById('totDay').textContent = formatDisplayPower(dayWh, 'energy');
+  document.getElementById('totNight').textContent = formatDisplayPower(nightWh, 'energy');
+  document.getElementById('totPeak').textContent = formatDisplayPower(peakW, 'power');
+  document.getElementById('totAvg').textContent = displayUnit === 'kW' ? `${(avgW/1000).toFixed(2)} kW` : `${avgW.toFixed(1)} W`;
 }
 
 // ─────────────────────────────────────────────────────────────
 // SLIDER HELPER
 // ─────────────────────────────────────────────────────────────
 function updateSlider(name, val) {
-  const map = { irrLoss: 'irrLossDisp', loss: 'lossDisp', dirt: 'dirtDisp', excess: 'excessDisp' };
+  const map = { irrLoss: 'irrLossDisp', loss: 'lossDisp', dirt: 'dirtDisp', excess: 'excessDisp', others: 'othersDisp' };
   document.getElementById(map[name]).textContent = val + '%';
 }
 
@@ -1427,7 +1551,7 @@ function buildLoadSummaryRows() {
   return loads.map((load, index) => {
     const baseLoad = load.power * load.qty;
     const baseLoadInv = baseLoad * load.inv;
-    const timedEnergy = baseLoadInv * (load.dayHrs + load.nightHrs);
+    const timedEnergy = baseLoad * (load.dayHrs + load.nightHrs);
     return `
       <tr>
         <td>${index + 1}</td>
@@ -1645,7 +1769,7 @@ function generatePrintableReport() {
             </div>
 
             <div class="meta-grid">
-              <div class="box"><div class="label">Project Owner</div><div class="value">${meta.owner}</div></div>
+              <div class="box"><div class="label">Project Name</div><div class="value">${meta.owner}</div></div>
               <div class="box"><div class="label">Project Location</div><div class="value">${meta.location}</div></div>
               <div class="box"><div class="label">Roof Type</div><div class="value">${meta.roofType}</div></div>
               <div class="box"><div class="label">Roof Orientation</div><div class="value">${meta.roofOrientation}</div></div>
@@ -1654,13 +1778,13 @@ function generatePrintableReport() {
 
             <div class="section-title">Load Profile Summary</div>
             <div class="summary-grid">
-              <div class="box"><div class="label accent-green">Power × Qty</div><div class="value accent-green">${totals.base}</div></div>
-              <div class="box"><div class="label accent-gold">(Power × Qty) × Inv</div><div class="value accent-gold">${totals.baseInv}</div></div>
-              <div class="box"><div class="label accent-red">Energy With Time</div><div class="value accent-red">${totals.totalWh}</div></div>
+              <div class="box"><div class="label accent-green">Total Power</div><div class="value accent-green">${totals.base}</div></div>
+              <div class="box"><div class="label accent-gold">Total Power(Inv)</div><div class="value accent-gold">${totals.baseInv}</div></div>
+              <div class="box"><div class="label accent-red">Total Daily Energy</div><div class="value accent-red">${totals.totalWh}</div></div>
               <div class="box"><div class="label">Peak Load</div><div class="value">${totals.peak}</div></div>
-              <div class="box"><div class="label accent-orange">Day Energy</div><div class="value accent-orange">${totals.day}</div></div>
-              <div class="box"><div class="label accent-blue">Night Energy</div><div class="value accent-blue">${totals.night}</div></div>
-              <div class="box"><div class="label">Load Average</div><div class="value">${totals.avg}</div></div>
+              <div class="box"><div class="label accent-orange">Day Time</div><div class="value accent-orange">${totals.day}</div></div>
+              <div class="box"><div class="label accent-blue">Night Time</div><div class="value accent-blue">${totals.night}</div></div>
+              <div class="box"><div class="label">Daily Load Average</div><div class="value">${totals.avg}</div></div>
             </div>
 
             <div class="section-title">Appliance Schedule</div>
@@ -1742,9 +1866,6 @@ function calculate() {
   const usableDod  = Math.min(Math.max((parseFloat(document.getElementById('battDod').value) || 80) / 100, 0.01), 0.95);
   const minSoc     = Math.min(Math.max((parseFloat(document.getElementById('battSoc').value) || (100 - usableDod * 100)) / 100, 0.05), 0.99);
 
-  // Compatibility helper:
-  // - values > 1 are treated as direct multipliers (e.g. 1.25)
-  // - values between 0 and 1 are treated as workbook-style loss fractions (e.g. 0.20 => /(1-0.20))
   const asMultiplier = (v, fallback) => {
     const x = parseFloat(v);
     if (!isFinite(x) || x <= 0) return fallback;
@@ -1752,9 +1873,6 @@ function calculate() {
     return 1 / Math.max(1 - x, 0.01);
   };
 
-  // Battery efficiency stays as efficiency by default (0.85 = 85%).
-  // If someone enters a very small workbook-style loss fraction such as 0.05,
-  // treat it as 5% storage loss => 95% efficiency.
   const asEfficiency = (v, fallback) => {
     const x = parseFloat(v);
     if (!isFinite(x) || x <= 0) return fallback;
@@ -1766,26 +1884,20 @@ function calculate() {
   const battSafetyMult = asMultiplier(battSafetyIn, 1.10);
   const battEff        = asEfficiency(battEffIn, 0.85);
 
-  // Hidden workbook-style end-of-life factors.
   const arrayEolFactor   = 0.8;
   const batteryEolFactor = 0.8;
 
-  // TABLE 2: SOLAR ARRAY
-  // Workbook sequence:
-  // irradiation -> irradiation loss -> basic array -> dirt -> aging/derating -> excess -> panel selection -> EoL check
   const effectiveIrr   = Math.max(irr * (1 - irrLossF), 0.01);
   const basicArrayWp   = totalWhInv / effectiveIrr;
   const dirtAdjustedWp = basicArrayWp * (1 + dirtF);
   const agedAdjustedWp = dirtAdjustedWp * (1 + lossF);
-  const requiredArrayWp = agedAdjustedWp * (1 + excessF);
+  const withExcessWp = agedAdjustedWp * (1 + excessF);
+  const requiredArrayWp = withExcessWp;
   const minPanelsExact = requiredArrayWp / Math.max(panelWp, 1);
   const selectedPanels = Math.max(1, Math.ceil(minPanelsExact));
   const selectedArrayWp = selectedPanels * panelWp;
   const arrayWpEoL     = selectedArrayWp * arrayEolFactor;
 
-  // TABLE 3: BATTERY BANK
-  // Workbook sequence:
-  // one day Ah -> autonomy -> aging -> safety -> DOD/SOC reserve -> storage efficiency -> battery selection
   const oneDayAh       = totalWhInv / Math.max(sysV, 1);
   const autonomyAh     = oneDayAh * autonomy;
   const agedAh         = autonomyAh * battAgingMult;
@@ -1800,16 +1912,10 @@ function calculate() {
   const availableBankAh = bankEolAh * usableDod;
   const actualAutonomy = oneDayAh > 0 ? (availableBankAh / oneDayAh) : 0;
 
-  // INVERTER SIZE
   const inverterKW = Math.ceil((peakWInv * 1.25) / 1000 * 10) / 10;
-
-  // CHARGE CONTROLLER (MPPT) based on installed array, not EoL-reduced array
   const ccAmps = Math.ceil((selectedArrayWp / Math.max(sysV, 1)) * 1.25 / 10) * 10;
-
-  // BATTERY KWH (installed nameplate at system voltage equivalent)
   const battKwh = (selectedBankAh * sysV) / 1000;
 
-  // UPDATE RESULTS DISPLAY
   document.getElementById('rPanels').textContent     = selectedPanels;
   document.getElementById('rPanelsUnit').textContent = `panels (${panelWp}Wp each) · calc ${minPanelsExact.toFixed(1)} min`;
   document.getElementById('rArrayWp').textContent    = (arrayWpEoL / 1000).toFixed(2) + ' kWp';
@@ -1819,7 +1925,6 @@ function calculate() {
   document.getElementById('rInverter').textContent   = inverterKW.toFixed(1);
   document.getElementById('rController').textContent = ccAmps;
 
-  // RECOMMENDATIONS
   document.getElementById('recPanels').textContent = `${selectedPanels} × ${panelWp}W Solar Panels (${(selectedArrayWp / 1000).toFixed(2)} kWp installed)`;
 
   let battStr = '';
@@ -1843,7 +1948,6 @@ function calculate() {
   updateTotals();
 }
 
-// INIT
 applyBatteryDefaults();
 renderTable();
 calculate();
