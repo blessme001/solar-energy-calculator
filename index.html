@@ -1,6 +1,6 @@
-<html lang="en"><head></head><body>&lt;
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chybonsolar Energy Calculator</title>
@@ -810,7 +810,8 @@
   .col-night { background: rgba(74,163,255,0.08) !important; }
 
 </style>
-
+</head>
+<body>
 
 <div class="container">
 
@@ -1165,6 +1166,16 @@
           <option value="agm">AGM / Lead Acid</option>
           <option value="gel">Gel</option>
         </select>
+      </div>
+
+      <div class="param-item">
+        <label>Battery Load Basis</label>
+        <select id="batteryMode" onchange="calculate()">
+          <option value="night" selected>Night Only</option>
+          <option value="day">Day Only</option>
+          <option value="both">Day + Night</option>
+        </select>
+        <div class="hint">Choose which load period the battery bank should support</div>
       </div>
       <div class="param-item">
         <label>Battery DOD (%)</label>
@@ -1594,10 +1605,10 @@ function generatePrintableReport() {
     battUnit: document.getElementById('rBattUnit').textContent,
     inverter: document.getElementById('rInverter').textContent,
     controller: document.getElementById('rController').textContent,
-    recPanels: document.getElementById('recPanels').textContent,
-    recBatt: document.getElementById('recBatt').textContent,
-    recInverter: document.getElementById('recInverter').textContent,
-    recController: document.getElementById('recController').textContent
+    recPanels: (document.getElementById('recPanels').value ?? document.getElementById('recPanels').textContent),
+    recBatt: (document.getElementById('recBatt').value ?? document.getElementById('recBatt').textContent),
+    recInverter: (document.getElementById('recInverter').value ?? document.getElementById('recInverter').textContent),
+    recController: (document.getElementById('recController').value ?? document.getElementById('recController').textContent)
   };
 
   const reportWindow = window.open('', '_blank', 'width=1100,height=900');
@@ -1898,7 +1909,18 @@ function calculate() {
   const selectedArrayWp = selectedPanels * panelWp;
   const arrayWpEoL     = selectedArrayWp * arrayEolFactor;
 
-  const oneDayAh       = totalWhInv / Math.max(sysV, 1);
+  const batteryMode = document.getElementById('batteryMode')?.value || 'night';
+  let batteryWh = 0;
+
+  if (batteryMode === 'day') {
+    batteryWh = loads.reduce((s, l) => s + l.power * l.qty * l.dayHrs, 0);
+  } else if (batteryMode === 'both') {
+    batteryWh = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs), 0);
+  } else {
+    batteryWh = loads.reduce((s, l) => s + l.power * l.qty * l.nightHrs, 0);
+  }
+
+  const oneDayAh       = batteryWh / Math.max(sysV, 1);
   const autonomyAh     = oneDayAh * autonomy;
   const agedAh         = autonomyAh * battAgingMult;
   const safeAh         = agedAh * battSafetyMult;
@@ -1921,7 +1943,8 @@ function calculate() {
   document.getElementById('rArrayWp').textContent    = (arrayWpEoL / 1000).toFixed(2) + ' kWp';
   document.getElementById('rBattAh').textContent     = battBankReqAh.toFixed(0);
   document.getElementById('rBattCount').textContent  = battCount;
-  document.getElementById('rBattUnit').textContent   = `× ${battCap}Ah = ${battKwh.toFixed(2)} kWh · Avail ${availableBankAh.toFixed(0)}Ah · DOD ${(usableDod * 100).toFixed(0)}% · Min SOC ${(minSoc * 100).toFixed(0)}% · ${actualAutonomy.toFixed(1)} day(s)`;
+  const batteryModeLabel = batteryMode === 'day' ? 'Day Only' : (batteryMode === 'both' ? 'Day + Night' : 'Night Only');
+  document.getElementById('rBattUnit').textContent   = `× ${battCap}Ah = ${battKwh.toFixed(2)} kWh · Avail ${availableBankAh.toFixed(0)}Ah · DOD ${(usableDod * 100).toFixed(0)}% · Min SOC ${(minSoc * 100).toFixed(0)}% · ${actualAutonomy.toFixed(1)} day(s) · ${batteryModeLabel}`;
   document.getElementById('rInverter').textContent   = inverterKW.toFixed(1);
   document.getElementById('rController').textContent = ccAmps;
 
