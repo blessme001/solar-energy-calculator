@@ -1197,9 +1197,9 @@
         <input type="number" id="battVoltage" value="51.2" step="0.1" min="6" max="60" onchange="calculate()">
       </div>
       <div class="param-item">
-        <label>Battery Aging Factor</label>
-        <input type="number" id="battAging" value="1.25" step="0.05" min="1" max="2" onchange="calculate()">
-        <div class="hint">Typically 1.20–1.25 for lead acid</div>
+        <label>Battery Aging (%)</label>
+        <input type="number" id="battAging" value="25" step="1" min="0" max="100" onchange="calculate()">
+        <div class="hint">Extra battery allowance for aging over time</div>
       </div>
       <div class="param-item">
         <label>Battery Safety Factor</label>
@@ -1891,7 +1891,7 @@ function calculate() {
     return Math.min(x, 0.99);
   };
 
-  const battAgingMult  = asMultiplier(battAgingIn, 1.25);
+  const battAgingMult  = 1 + ((isFinite(battAgingIn) ? battAgingIn : 25) / 100);
   const battSafetyMult = asMultiplier(battSafetyIn, 1.10);
   const battEff        = asEfficiency(battEffIn, 0.85);
 
