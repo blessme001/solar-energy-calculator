@@ -1844,7 +1844,7 @@ function generatePrintableReport() {
 
 function calculate() {
   const totalWhRaw = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs), 0);
-  const totalWhInv = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs) * l.inv, 0);
+  const totalWhInv = loads.reduce((s, l) => s + l.power * l.qty * (l.dayHrs + l.nightHrs), 0);
   const peakWRaw   = loads.reduce((s, l) => s + l.power * l.qty, 0);
   const peakWInv   = loads.reduce((s, l) => s + l.power * l.qty * l.inv, 0);
 
