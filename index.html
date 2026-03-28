@@ -1202,13 +1202,14 @@
         <div class="hint">Extra battery allowance for aging over time</div>
       </div>
       <div class="param-item">
-        <label>Battery Safety Factor</label>
-        <input type="number" id="battSafety" value="1.1" step="0.05" min="1" max="2" onchange="calculate()">
+        <label>Battery Safety (%)</label>
+        <input type="number" id="battSafety" value="10" step="1" min="0" max="100" onchange="calculate()">
+              <div class="hint">Extra design margin for battery sizing</div>
       </div>
       <div class="param-item">
-        <label>Efficiency Losses (Battery Storage)</label>
-        <input type="number" id="battEff" value="0.85" step="0.01" min="0.5" max="1" onchange="calculate()">
-        <div class="hint">0.85 = 85% round-trip efficiency</div>
+        <label>Battery Efficiency (%)</label>
+        <input type="number" id="battEff" value="85" step="1" min="1" max="100" onchange="calculate()">
+        <div class="hint">Round-trip battery efficiency percentage</div>
       </div>
     </div>
   </div>
@@ -1237,9 +1238,9 @@
         <div class="result-unit" id="rPanelsUnit">panels (475Wp each) · calc 4.1 min</div>
       </div>
       <div class="result-card solar">
-        <div class="result-label">Array Size (EoL)</div>
+        <div class="result-label">Array Size</div>
         <div class="result-value solar" id="rArrayWp">1.90 kWp</div>
-        <div class="result-unit">Wp (end of life)</div>
+        <div class="result-unit">Adjusted by ÷ 0.9</div>
       </div>
       <div class="result-card battery">
         <div class="result-label">Battery Bank (EoL)</div>
@@ -1820,7 +1821,7 @@ function generatePrintableReport() {
             <div class="section-title">System Sizing Results</div>
             <div class="result-grid">
               <div class="box"><div class="label">Solar Array</div><div class="value">${results.panels}</div><div class="muted">${results.panelsUnit}</div></div>
-              <div class="box"><div class="label">Array Size (EoL)</div><div class="value">${results.array}</div></div>
+              <div class="box"><div class="label">Array Size</div><div class="value">${results.array}</div></div>
               <div class="box"><div class="label">Battery Bank (EoL)</div><div class="value">${results.battAh} Ah</div></div>
               <div class="box"><div class="label">Number of Batteries</div><div class="value">${results.battCount}</div><div class="muted">${results.battUnit}</div></div>
               <div class="box"><div class="label">Inverter Size</div><div class="value">${results.inverter} kW</div></div>
@@ -1892,8 +1893,8 @@ function calculate() {
   };
 
   const battAgingMult  = 1 + ((isFinite(battAgingIn) ? battAgingIn : 25) / 100);
-  const battSafetyMult = asMultiplier(battSafetyIn, 1.10);
-  const battEff        = asEfficiency(battEffIn, 0.85);
+  const battSafetyMult = 1 + ((isFinite(battSafetyIn) ? battSafetyIn : 10) / 100);
+  const battEff        = Math.min(Math.max((isFinite(battEffIn) ? battEffIn : 85) / 100, 0.01), 0.99);
 
   const arrayEolFactor   = 0.8;
   const batteryEolFactor = 0.8;
@@ -1940,7 +1941,8 @@ function calculate() {
 
   document.getElementById('rPanels').textContent     = selectedPanels;
   document.getElementById('rPanelsUnit').textContent = `panels (${panelWp}Wp each) · calc ${minPanelsExact.toFixed(1)} min`;
-  document.getElementById('rArrayWp').textContent    = (arrayWpEoL / 1000).toFixed(2) + ' kWp';
+  const arrayWpDirect = selectedPanels > 0 ? ((selectedPanels * panelWp) * 0.9) : 0;
+  document.getElementById('rArrayWp').textContent    = (arrayWpDirect / 1000).toFixed(2) + ' kWp';
   document.getElementById('rBattAh').textContent     = battBankReqAh.toFixed(0);
   document.getElementById('rBattCount').textContent  = battCount;
   const batteryModeLabel = batteryMode === 'day' ? 'Day Only' : (batteryMode === 'both' ? 'Day + Night' : 'Night Only');
